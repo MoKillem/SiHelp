@@ -1,0 +1,260 @@
+
+{% extends 'blog/layout.html' %}
+
+{%block modal%}
+  <!--Modal Definitions-->
+  <!--Modal Rate Ad-->
+
+
+  <div class="modal fade" id="RateModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary text-center">Create an Ad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+<label for="RateAd">How many stars would you rate this ad?</label>
+<input type="number" name="quantity" id="RateAd" min="0" max="10" placeholder = "0-10" class = "form-control">
+
+
+  </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create</button>
+        </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  <!--/Modal Rate Ad-->
+
+  <!--Modal Create Ad-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary text-center">Create an Ad</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+
+    <form class = "mx-auto">
+<div class = "form-group text-center pt-1">
+  <label for = "AdvertPremise">What subject are you advertising for?</label>
+  <select class="form-control" id="FormControlSelect1">
+      <option value=""></option>
+      <option>Physics</option>
+      <option>Chemistry</option>
+      <option>Biology</option>
+      <option>Mathematics</option>
+      <option>Engineering</option>
+
+    </select>
+</div>
+
+<div class = "form-group text-center pt-1 ">
+    <label for = "FormControlSelect1">Will you offer assignment help?</label>
+    
+    <select class="form-control" id="FormControlSelect1">
+        <option value=""></option>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </div>
+
+
+    <div class = "form-group text-center pt-1">
+        <label for = "AdvertExtraOption">Is this subject is relevant to a university unit?</label>
+        <select class="form-control" id="AdvertExtraOption" onChange = "ChangeContent()">
+            <option value=""></option>
+            <option value = "1">Yes</option>
+            <option value = "2">No</option>
+          </select>
+      </div>
+<div class="form-group text-center pt-1" id = "AdExtra"></div>
+
+  </form>
+
+  </div>
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Create</button>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  
+  
+  <!--/Modal Create Ad-->
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--/Modal Definitions-->
+{% endblock %}
+
+
+           
+
+
+{% block content %}
+            <!--Right side Bar-->
+    <div class="sidebar pt-5">
+      <hr>
+    <h6 class = " ml-2"> View Top Posts <h6>
+    <hr>
+     <!-- Button trigger modal -->
+
+      
+      
+    <a href="#"><small>Highest Rated</small></a>
+    <a href="#"><small>Most Affordable</small></a>
+    <a href="#"><small>Verified Users</small></a>
+    <hr>
+
+
+
+
+
+
+
+
+        <!--Create an Ad-->
+        {% if not loggedin %}
+
+    <a href="#" data-toggle="modal" data-target="#exampleModal"><small>Create an Ad</small></a>
+{% endif %}
+        <!--/Create an Ad-->
+
+  </div>
+              <!--/Right side Bar-->
+
+      
+
+
+
+        <!--Main Content-->
+
+       {% for n in range %}
+                        <div class = "wholepost mt-5">
+                                <div class = " posts rounded">
+                        <h4 class = "text-center">Juliet Lee</h4>
+                        <hr style = "background-Color:#109dc0;" width = 100%;>
+                        <div class="row">
+                                <div class="col-6  pt-2 ">
+
+                                    {% load static %}    
+                                        <img src="{% static 'blog/Juliet.jpg' %}" width= "140px" class="rounded-circle photo-post"  alt="Cinque Terre">
+                                       <div id = "ForceView">
+                                       <a href = "/profilepage" class = "nodecor"> <button type = "button" class = " pt-2 btn btn-outline-info btn-lg btn-block">
+                                            View Profile
+                                         </button>
+                                        </a>                              </div>
+
+                                        <div class="vl">                                  
+                                          
+                                      </div>
+
+
+                                    </div>
+
+                                <div class="col-6 text-center pb-2  pr-4">
+                                  <div class = "pb-2">
+                                  <div><strong>I will help you with...</strong></div>
+                                <div>3rd year of Data Science</div>
+                              </div>
+                                <div class = "pb-2">
+                                <div><strong>Number:</strong></div>
+                                <div>0422676860</div>
+                                </div>
+                                <div class = "pb-2">
+                                  <div><strong>Price:</strong></div>
+                                  <div>300 /hr</div>
+                                  </div>
+                                  <div class = "pb-2">
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star checked"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+                                  <span class="fa fa-star"></span>
+
+                                
+
+                                  </div>
+                                  <div id = "RateForced">
+                                  <button type = "button" class = "btn btn-outline-info btn-lg btn-block " data-toggle="modal" data-target="#RateModal">
+                                      Rate
+                                   </button>
+                                   </div>
+
+                            </div>
+
+
+                            </div>
+
+                              </div>
+                            </div>
+
+
+
+                {% endfor %}            
+
+
+
+
+                            
+                                                        
+
+
+                            
+            
+                              
+
+
+
+
+
+                            
+
+             
+
+        <!--/Main Content-->
+
+        {% endblock %}
+
+
+
+
+
