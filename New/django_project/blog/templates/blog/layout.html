@@ -102,7 +102,7 @@
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 
-                {% if not loggedin %}
+                {% if not user.is_authenticated %}
 
                       <div class="collapse navbar-collapse" id="navbarNav">
                   <ul class="navbar-nav">
@@ -110,8 +110,9 @@
                       <a class="navlink "  href="/marketplace" >Home</a>
                     </li>
                     
+                    
                     <li >
-                      <span  data-toggle="modal" data-target="#LoginModal"><a href="#" class="navlink " >Sign Up</a></span>
+                      <span  data-toggle="modal" data-target="#LoginModal"><a href="#" class="navlink " >Login</a></span>
                     </li>
                     <li >
                       <a class="navlink" href="/entry">Subjects</a>
@@ -146,6 +147,10 @@
                   
                     <li >
                       <a class="navlink" href="/entry">Subjects</a>
+                    </li
+                    >
+                    <li>
+                      <a class="navlink "  href="/logout" >Logout</a>
                     </li>
                   </ul>
                 </div>
