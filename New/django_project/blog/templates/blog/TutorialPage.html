@@ -90,7 +90,9 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          {% if  user.is_authenticated %}
           <button type="button" class="btn btn-primary">Create</button>
+          {%endif%}
         </div>
 
         </div>
