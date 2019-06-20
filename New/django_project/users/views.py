@@ -9,7 +9,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
+            messages.success(request, "You can now login as " + username)
             return redirect('loginAcc')
     else:
         form = UserRegisterForm()
@@ -22,8 +22,8 @@ def Tutoregister(request):
         if form1.is_valid():
             form1.save()
             username = form1.cleaned_data.get('username')
-            messages.success(request, f'You can now login as {username}!')
-            return redirect('blog-home')
+            messages.success(request, "You can now login as " + username)
+            return redirect('loginAcc')
     else:
         form1 = TutorRegisterForm()
     return render(request, 'users/register.html', {'form':form1})

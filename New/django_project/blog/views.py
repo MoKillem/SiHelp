@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 # from django.http import HttpResponse
 # Create your views here.
 
@@ -45,13 +46,14 @@ def SignUpNt(request):
     return render(request, 'blog/Nontutorsignup.html')
 
 
-   
+@login_required
 def Account(request):
-   
     return render(request, 'blog/Account.html',{'range': range(10)})
+    
 def Entry(request):
    
     return render(request, 'blog/EntryPage.html')
+
 def ProfilePage(request):
    
     return render(request, 'blog/ProfilePage.html',{'range': range(10)})

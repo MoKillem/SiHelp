@@ -127,3 +127,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'django_project/media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = "blog-marketplace"
+LOGIN_URL = "loginAcc"

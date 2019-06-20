@@ -14,7 +14,7 @@
 
 <!---Forms-->
 
-<form class = "formSignup" method = "POST">
+<form enctype="multipart/form-data" class = "formSignup" method = "POST" >
     {% csrf_token %}
         <div class = "form-group">
       {{form|crispy}}
