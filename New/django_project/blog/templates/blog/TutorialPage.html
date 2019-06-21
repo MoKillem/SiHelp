@@ -126,18 +126,32 @@
 
 {% block content %}
             <!--Right side Bar-->
-    <div class="sidebar pt-5">
+  
+
+    <div class="sidebar pt-5 ">
+        <v-card>
+
       <hr>
-    <h6 class = " ml-2"> View Top Posts <h6>
+
+    <h3  class ="text-center"> View Top Posts <h3>
+
     <hr>
      <!-- Button trigger modal -->
 
-      
-      
-    <a href="#"><small>Highest Rated</small></a>
-    <a href="#"><small>Most Affordable</small></a>
-    <a href="#"><small>Verified Users</small></a>
+      <div class ="text-center">
+      <v-card-title>
+    <v-btn block  flat color="indigo lighten-3" dark>Highest Rated</v-btn>
+      </v-card-title>
+      <v-card-title>
+        <v-btn block flat color="indigo lighten-3" dark>Most Affordable</v-btn>
+      </v-card-title>
+        <v-card-title>
+    <v-btn block flat color="indigo lighten-3" dark>Verified Users</v-btn>
+    </v-card-title>
+  </v-card>
+  </div>
     <hr>
+
 
 
 
@@ -161,77 +175,65 @@
 
 
         <!--Main Content-->
-
+        
+        <v-container   grid-list-xl  >
        {% for n in range %}
-                        <div class = "wholepost mt-5">
-                                <div class = " posts rounded">
-                        <h4 class = "text-center">Juliet Lee</h4>
-                        <hr style = "background-Color:#109dc0;" width = 100%;>
-                        <div class="row">
-                                <div class="col-6  pt-2 ">
+       
+                        
 
-                                    {% load static %}    
-                                        <img src="{% static 'blog/Juliet.jpg' %}" width= "140px" class="rounded-circle photo-post"  alt="Cinque Terre">
-                                       <div id = "ForceView">
-                                       <a href = "/profilepage" class = "nodecor"> <button type = "button" class = " pt-2 btn btn-outline-info btn-lg btn-block">
-                                            View Profile
-                                         </button>
-                                        </a>                              </div>
+       <v-flex mt-5 xs12 offset-sm3  offset-md3 offset-lg2 sm-6 md-6 lg-10  app  >
+        <v-card light color="grey lighten-5" md-5 fluid>
+          <v-flex pt-3 text-xs-center>
+          <v-card-text  class = "display-1 font-weight-light ">
+            Juliet Lee
+            <v-divider ></v-divider>
+               </v-card-text>
+               <v-layout  row justify-space-between  align-end >
+                 
+                  <v-flex xs5 offset-xs1  grow  class = "photovue">   
+                    
+                                      {% load static %}    
+                  <v-img src="{% static 'blog/Juliet.jpg' %}"
+                  contain ></v-img >
+                
+               </v-flex>
 
-                                        <div class="vl">                                  
-                                          
-                                      </div>
+               <v-flex xs6   pb-5 class = "  font-weight-light subheading centerInfo" grow wrap>
+                 <div>
+                   <v-card fluid>
+                  <div class = "pb-2 pt-3">
+                      <div class = "pb-2" ><strong>I will help you with...</strong></div>
+                    <div>3rd year of Data Science</div>
+                  </div>
+                    <div class = "pb-2 pt-3 ">
+                    <div class = "pb-2"><strong>Number:</strong></div>
+                    <div>0422676860</div>
+                    </div>
+                    <div class = "pb-2 pt-3">
+                      <div class = "pb-2"><strong>Price:</strong></div>
+                      <div >300 /hr</div>
+                      </div>
+                      <v-btn   data-toggle="modal" data-target="#RateModal" block color="warning">Rate</v-btn>
 
-
-                                    </div>
-
-                                <div class="col-6 text-center pb-2  pr-4">
-                                  <div class = "pb-2">
-                                  <div><strong>I will help you with...</strong></div>
-                                <div>3rd year of Data Science</div>
-                              </div>
-                                <div class = "pb-2">
-                                <div><strong>Number:</strong></div>
-                                <div>0422676860</div>
-                                </div>
-                                <div class = "pb-2">
-                                  <div><strong>Price:</strong></div>
-                                  <div>300 /hr</div>
-                                  </div>
-                                  <div class = "pb-2">
-                                  <span class="fa fa-star checked"></span>
-                                  <span class="fa fa-star checked"></span>
-                                  <span class="fa fa-star checked"></span>
-                                  <span class="fa fa-star"></span>
-                                  <span class="fa fa-star"></span>
-                                  <span class="fa fa-star"></span>
-                                  <span class="fa fa-star"></span>
-                                  <span class="fa fa-star"></span>
-                                  <span class="fa fa-star"></span>
-                                  <span class="fa fa-star"></span>
-
-                                
-
-                                  </div>
-                                  <div id = "RateForced">
-                                  <button type = "button" class = "btn btn-outline-info btn-lg btn-block " data-toggle="modal" data-target="#RateModal">
-                                      Rate
-                                   </button>
-                                   </div>
-
-                            </div>
-
-
-                            </div>
-
-                              </div>
-                            </div>
-
-
-
+                        </div>
+                      </v-card>
+                      <v-card>
+                          <v-btn href = "/profilepage" class ="nodecor" block color="info">View Profile</v-btn>
+                        </v-card> 
+                        
+               </v-flex>
+              </v-layout>
+              
+              </v-flex>
+             
+        </v-card>
+        
+        
+</v-flex>
                 {% endfor %}            
 
-
+                   
+      </v-container>
 
 
                             
@@ -251,7 +253,7 @@
              
 
         <!--/Main Content-->
-
+        
         {% endblock %}
 
 

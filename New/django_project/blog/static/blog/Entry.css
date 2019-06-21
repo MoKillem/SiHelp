@@ -1,3 +1,23 @@
+.photovue{
+position:relative;
+bottom:100px;
+
+}
+.centerInfo{
+  position:relative;
+  right:40px;
+  bottom:20px;
+}
+/*Vu-id*/
+
+.navbarTitle{
+  font-size: 40px;
+}
+.navbarTitle:hover{
+  text-decoration-line: none;
+  color:rgb(184, 184, 240);
+  
+}
 /* Specific classes / Ids */
 .nodecor:hover{
   text-decoration: none;
@@ -48,7 +68,11 @@ right:20%;
 
 }
 
-
+/*Centering posts*/
+.centering{
+  position:relative;
+  left:20%;
+}
 /*Primary Post System Defer */
 .wholepost{
   margin-top:10px;
@@ -195,17 +219,14 @@ width: 100%;
       /* The side navigation menu */
 .sidebar {
   color: #186cc0;
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 150px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1;
-  top:11%; /* Stay at the top */
-  margin-top:15px;
-  left: 0;
   background-color: #f8f9fa ;
   overflow-x: hidden; /* Disable horizontal scroll */
+  position: fixed;
+  width: 200px;
+  height: 100%;
 
 }
+
 
 
 
@@ -216,7 +237,7 @@ width: 100%;
 
 /*Side bar queries*/
 .sidebar .sidequeries{
-  color:#186cc0;
+  color:#9294a5;
   width:90%;
   margin-left:5%;
   display: block;
@@ -245,7 +266,7 @@ margin-top: 5px;
 
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .sidebar {
     width: 100%;
     height: auto;

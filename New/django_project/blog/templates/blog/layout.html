@@ -1,5 +1,9 @@
 
 <html>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
      {% load static %}    
@@ -7,6 +11,8 @@
     <title>SiHelp</title>
       
 <body>
+    <div id="app">
+        <v-app>
         {% block modal %}
         {% endblock %}
 
@@ -95,84 +101,94 @@
 
             <!--NavBar-->
 
-        <nav class="navbar navbar-expand-lg navbar-dark primary_col sticky-top">
-                <a class="navbar-brand" href="/marketplace"><strong>Si-Help</strong></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
+            <v-toolbar dark color="primary" app>
+                  <v-toolbar-title>
+            <a class="navbarTitle text-white" href="/marketplace"><strong>Si-Help</strong></a></v-toolbar-title>
+            <v-spacer></v-spacer>
+          
                 
                 {% if not user.is_authenticated %}
-
-                      <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav">
-                    <li>
-                      <a class="navlink "  href="/marketplace" >Home</a>
-                    </li>
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-menu offset-y>
+                        <v-btn flat slot="activator">
+                          <v-icon left>expand_more</v-icon>
+                          <span>Menu</span>
+                        </v-btn>
+                        <v-list>
+                          <v-list-tile>
+                          
+                              <v-btn class ="nodecor" flat  href="/marketplace">Home</span></v-btn>
+                            </v-list-tile>
+                              <v-list-tile>
+                                  <v-btn flat class ="nodecor" href="/entry">Subjects</v-btn>
+                                </v-list-tile>
+                            
+                        </v-list>
+                      </v-menu>
                     
-                    
-                    <li >
-                      <span  data-toggle="modal" data-target="#LoginModal"><a href="#" class="navlink " >Login</a></span>
-                    </li>
-                    <li >
-                      <a class="navlink" href="/entry">Subjects</a>
-                    </li>
-                  </ul>
-                </div>
+                    <v-btn flat class ="nodecor"  data-toggle="modal" data-target="#LoginModal" ><span>Login</span>
+                      <v-icon right >exit_to_app</v-icon>
+                  </v-toolbar-items>
+                     
     
                 {% else %}
+                <v-toolbar-items class="hidden-sm-and-down">
+                    
+                    <v-menu offset-y>
+                        <v-btn flat slot="activator">
+                          <v-icon left>expand_more</v-icon>
+                          <span>Menu</span>
+                        </v-btn>
+                        <v-list>
+                          <v-list-tile>
+                          
+                              <v-btn class ="nodecor" flat  href="/marketplace">Home</span></v-btn>
+                            </v-list-tile>
+                            <v-list-tile>
+                                <v-btn flat class ="nodecor" href="/entry">Subjects</v-btn>
+                              </v-list-tile>
+                              <v-list-tile>
+                                  <v-btn flat class ="nodecor" href="/Account">Account</v-btn>
+                                </v-list-tile>
+                            
+                        </v-list>
+                      </v-menu>
 
-                <form class="form-inline mx-auto searchBar">
-                        <div class="md-form my-0">
-                          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                          <select class="form-control pt-1 pr-4 mx-auto">
-                            <option selected>Search by?</option>
-                            <option value="1">Subject/Unit</option>
-                            <option value="2">Rating</option>
-                            <option value="3">Price</option>
-                          </select>
-                        </div>
-
-                        <button href="#" class="btn btn-large btn-outline-light btn-md my-0 ml-sm-2" type="submit">Search</button>
-                      </form>
-
-                      <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav">
-                      <li >
-                          <a class="navlink" href="/marketplace">Home</a>
-                        </li>
-                    <li>
-                      <a class="navlink"  href="/account" >Account</a>
-                    </li>
-                  
-                    <li >
-                      <a class="navlink" href="/entry">Subjects</a>
-                    </li
-                    >
-                    <li>
-                      <a class="navlink "  href="/logout" >Logout</a>
-                    </li>
-                  </ul>
-                </div>
+                    <v-btn flat class ="nodecor" href="/logout"><span>Logout</span>
+                    <v-icon right >exit_to_app</v-icon>
+                    </v-btn>
+                   
+                  </v-toolbar-items>
+                     
+               
 
                 {% endif %}
 
 
-              </nav>
+             </v-toolbar>
+
         <!--/NavBar-->
 
-
+        <v-content>
         <!--Content-->
         {% block content %}
         {% endblock %}
         <!--/Content-->
+        </v-content>
+            </v-app>
 
+            </div>
 
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+  
+  <script>
+    new Vue({ el: '#app' })
+  </script>
 {% load static %}    
 <script src= "{% static 'blog/TutorialPage.js' %}"></script>
 
