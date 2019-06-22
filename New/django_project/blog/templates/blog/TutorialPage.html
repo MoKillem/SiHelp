@@ -148,6 +148,13 @@
         <v-card-title>
     <v-btn block flat color="indigo lighten-3" dark>Verified Users</v-btn>
     </v-card-title>
+    {% if  user.is_authenticated %}
+
+    <v-card-title>
+      <v-btn block data-toggle="modal" data-target="#exampleModal" flat color="indigo lighten-3" dark>Create an Ad</v-btn>
+      </v-card-title>
+      {% endif %}
+
   </v-card>
   </div>
     <hr>
@@ -160,13 +167,7 @@
 
 
 
-        <!--Create an Ad-->
-        {% if  user.is_authenticated %}
-
-    <a href="#" data-toggle="modal" data-target="#exampleModal"><small>Create an Ad</small></a>
-{% endif %}
-        <!--/Create an Ad-->
-
+      
   </div>
               <!--/Right side Bar-->
 
