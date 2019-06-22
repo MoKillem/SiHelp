@@ -1,14 +1,8 @@
-
-
-/*Centering photos for posts*/
-
 .photovue{
 position:relative;
 bottom:100px;
 
 }
-/*Centering information for posts*/
-
 .centerInfo{
   position:relative;
   right:40px;

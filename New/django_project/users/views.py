@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm,TutorRegisterForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
@@ -16,6 +17,7 @@ def register(request):
 
     return render(request, 'users/register.html', {'form':form})
 
+
 def Tutoregister(request):
     if(request.method) == 'POST':
         form1 = TutorRegisterForm(request.POST)
@@ -27,6 +29,10 @@ def Tutoregister(request):
     else:
         form1 = TutorRegisterForm()
     return render(request, 'users/register.html', {'form':form1})
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
 
 
 
