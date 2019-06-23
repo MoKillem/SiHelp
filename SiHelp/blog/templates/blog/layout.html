@@ -1,0 +1,280 @@
+
+<html>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     {% load static %}    
+     <link rel="stylesheet" href="{% static 'blog/Entry.css' %}">
+    <title>SiHelp</title>
+      
+<body>
+    <div id="app">
+        <v-app>
+        {% block modal %}
+        {% endblock %}
+
+
+<!--Modal SignUp Ad-->
+
+
+
+<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="SignUpModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="SignUpModalLabel">What type of user are you?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class ="text-center "><a href = "/register" class = "btn btn-large btn-outline-info  mb-2">I am looking for assignment help.</a></div>
+        <div class = "text-center"><a href = "/registerT"class = "btn btn-large btn-outline-info  mb-2">I want to help people with their assignments.</a></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--/Modal SignUp Ad-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+            <!--NavBar-->
+
+            <v-toolbar dark color="primary" app>
+                  <v-toolbar-title>
+            <a class="navbarTitle text-white" href="/marketplace"><strong>Si-Help</strong></a></v-toolbar-title>
+            <v-spacer></v-spacer>
+          
+                
+                {% if not user.is_authenticated %}
+                <v-toolbar-items class="hidden-sm-and-down">
+                    <v-menu offset-y>
+                        <v-btn flat slot="activator">
+                          <v-icon left>expand_more</v-icon>
+                          <span>Menu</span>
+                        </v-btn>
+                        <v-list>
+                          <v-list-tile>
+                          
+                              <v-btn class ="nodecor" flat  href="/marketplace">Home</span></v-btn>
+                            </v-list-tile>
+                              <v-list-tile>
+                                  <v-btn flat class ="nodecor" href="/entry">Subjects</v-btn>
+                                </v-list-tile>
+                            
+                        </v-list>
+                      </v-menu>
+                    <!--Login Modal-->
+                    <v-dialog v-model="dialog" max-width="600px" >
+                      <template v-slot:activator="{ on }">
+                        <v-btn flat class ="nodecor " dark v-on="on">Login
+                        <v-icon right >exit_to_app</v-icon></v-btn>
+                      </template>
+                  <v-layout column>
+                      <v-card >
+                        <v-flex text-center mt-4>
+                            <v-card-content class = "  display-1 font-weight-light">Login</v-card-content>
+                        </v-flex>
+                      
+                            <v-flex mx-5>
+
+                            <v-card-content>
+                                <form class = " mt-3 navbar-form navbar-right" method = "POST" action = '{% url "loginAcc" %}'>
+          
+                                    {% csrf_token %}
+                                    <v-layout column>
+                                    <v-flex mt-3>
+                                  
+                                    <v-text-field
+                                    name = 'username'
+                                    :counter="30"
+                                    label="Username"
+                                    required
+                                    prepend-icon="face"
+                                  ></v-text-field>
+                                </v-flex>
+                                <v-flex mt-3>
+                          
+                                  <v-text-field
+                                  name='password'
+                                  :type="'password'"
+                                    :counter="30"
+                                    label="Password"
+                                    required
+                                    prepend-icon="storage"
+
+                                  ></v-text-field>
+                               </v-flex>
+                               <v-flex text-center mt-3 mb-4>
+                          
+                                  <v-btn  color="info" type = "submit"dark>Login</v-btn>
+                                </v-flex>
+
+                                  <!--SignUp Modal-->
+                                <v-dialog v-model="signupdialog" max-width="600px" >
+
+                                <template v-slot:activator="{ on }">
+
+
+                                <v-btn 
+                                class="mx-0 mb-3"  
+                                large
+                                color = "grey"
+                                dark v-on="on"
+                              >
+                          
+                                Need to register?
+                              </v-btn>
+                            </template>
+                            <v-layout column>
+                                <v-layout column>
+
+                            <v-card>
+                                <v-flex text-center mt-5 >
+                                    <v-card-content class = "  display-1 font-weight-light mb-3">What type of user are you?</v-card-content>
+                                </v-flex>
+                                <v-card-content>
+                                <v-flex text-center>
+                                <v-layout column>
+                                  <v-flex mt-5 mb-2 mx-5>
+                                    <v-btn 
+                                    class="mx-0 mb-3 nodecor"  
+                                    large
+                                    color = "info"
+                                    href = "/register"
+
+                                  >
+                                  Become a student
+                                </v-btn>
+
+                                </v-flex>
+
+                                <v-flex mb-5 mx-5>
+                                    <v-btn 
+                                    class="mx-0 mb-3 nodecor"  
+                                    large
+                                    color = "info"
+                                    href = "/registerT"
+                                  >
+                                            Become a tutor
+                                </v-btn>
+                                </v-flex>
+                                </v-layout>
+                              </v-flex>
+                            </v-card-content>
+                            </v-card>
+                          </v-layout>
+
+                            <!--/SignUp Modal-->
+
+</v-dialog>
+
+                              
+
+
+
+
+
+                                </v-layout>
+                            </form>
+                            
+                          </v-card-content>
+
+                            </v-flex>
+                            </v-card>
+                        
+                      </v-dialog>
+                    </v-layout>
+
+                      <!--/Login Modal-->
+                  </v-toolbar-items>
+                     
+    
+                {% else %}
+                <v-toolbar-items class="hidden-sm-and-down">
+                    
+                    <v-menu offset-y>
+                        <v-btn flat slot="activator">
+                          <v-icon left>expand_more</v-icon>
+                          <span>Menu</span>
+                        </v-btn>
+                        <v-list>
+                          <v-list-tile>
+                          
+                              <v-btn class ="nodecor" flat  href="/marketplace">Home</span></v-btn>
+                            </v-list-tile>
+                            <v-list-tile>
+                                <v-btn flat class ="nodecor" href="/entry">Subjects</v-btn>
+                              </v-list-tile>
+                              <v-list-tile>
+                                  <v-btn flat class ="nodecor" href="/Account">Account</v-btn>
+                                </v-list-tile>
+                            
+                        </v-list>
+                      </v-menu>
+
+                    <v-btn flat class ="nodecor" href="/logout"><span>Logout</span>
+                    <v-icon right >exit_to_app</v-icon>
+                    </v-btn>
+                   
+                  </v-toolbar-items>
+                     
+               
+
+                {% endif %}
+
+
+             </v-toolbar>
+
+        <!--/NavBar-->
+
+        <v-content>
+        <!--Content-->
+        {% block content %}
+        {% endblock %}
+        <!--/Content-->
+        </v-content>
+            </v-app>
+
+            </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+  
+  <script>
+    new Vue({ el: '#app' })
+  </script>
+{% load static %}    
+<script src= "{% static 'blog/TutorialPage.js' %}"></script>
+
+
+  </body>
+</html>
