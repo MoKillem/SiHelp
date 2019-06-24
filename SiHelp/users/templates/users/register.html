@@ -1,0 +1,199 @@
+<<<<<<< HEAD:New/django_project/users/templates/users/register.html
+{% extends 'blog/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+
+<!---Forms-->
+<v-container  >
+
+  <v-layout  column justify-center align-center   >
+    <form enctype="multipart/form-data" method="POST" >
+      {% csrf_token %}
+
+  <v-card   max-width = "600px" class ="mx-1">
+    
+  <v-layout      column>
+      <v-card-text class = "text-xs-center mb-1 mt-4 font-weight-light display-1">
+Please Fill in all required fields 
+<div class ="caption">1/2</div>     
+</v-card-text>
+<v-divider class = "mx-5 mb-5" ></v-divider>
+<v-flex   mx-5>
+  
+            <v-text-field mt-3
+            type="text"
+             name="username"
+            id="id_username" 
+            :counter="20"
+            label="Username"
+            required
+            hint=" Recommended 20 characters or fewer. Letters, digits and @/./+/-/_ only."
+            large
+            persistent-hint
+            box
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex  mt-3 mx-5>
+  
+            <v-text-field
+            type="text" 
+            name="email"
+            hint="e.g man@gmail.com" 
+            id="id_email" 
+            :counter="100"
+            label="Email"
+            required
+            large
+            box
+
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex mt-3 mx-5 >
+            <v-text-field
+            type="text" 
+            name="first_name" 
+            id="id_first_name"
+            :counter="30"
+            label="First name"
+            required
+            large
+            box
+
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex mt-3  mx-5>
+  
+            <v-text-field
+            type="text"
+             name="last_name" 
+             id="id_last_name"
+            :counter="30"
+            label="Last name"
+            required
+            large
+            box
+
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex mt-3 mx-5>
+  
+            <v-text-field
+            type="text" 
+            name="phone" 
+            id="id_phone"
+            :counter="10"
+            label="Contact Number"
+            required
+            large
+            box
+
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex  mt-3 mx-5>
+  
+            <v-text-field
+           v-model="password"
+            type="password" 
+            name="password1"  
+            id="id_password1"
+            :counter="20"
+            label="Password"
+            required
+            box
+            hint = "The Password should be at least 9 characters long  and should not be too similiar to other info. It also should be alphanumeric."
+            large
+            persistent-hint
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex mt-3  mx-5>
+  
+            <v-text-field
+            type="password"
+            v-model="password"
+            name="password2" 
+             id="id_password2"
+            :counter="20"
+            label="Confirm Password"
+            required
+            large
+            box
+          ></v-text-field>
+        </v-flex>
+
+        <v-flex  mx-5 mt-4 mb-3 >
+           <v-btn type="submit" block large color = "warning">Sign Up</v-btn>
+        </v-flex>
+        
+
+    </v-flex>
+  </v-layout>
+</v-card>
+</form>
+</v-layout>
+</v-container>
+{%if messages%}
+{%for message in messages%}
+<div class = "alert alert-{{message.tags}}">
+  {{message}}
+</div>
+{%endfor%}
+{%endif%}
+<!--/Forms-->
+{% endblock %}
+
+ 
+
+
+
+=======
+{% extends 'blog/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!--Title-->
+<div class ="text-primary mt-5  text-center">
+<h1> Please fill the fields. </h1>
+<small> * Required fields </small>
+</div>
+    <p class="text-center mt-0.5 pb-0.5 pt-0.5 col-sm-12  text-info">
+      </p>
+    
+<!--/Title-->
+
+<!---Forms-->
+
+<form enctype="multipart/form-data" class = "formSignup" method = "POST" >
+    {% csrf_token %}
+        <div class = "form-group">
+      {{form|crispy}}
+    </div>
+      
+             
+
+
+      
+      <button type="submit" class="mt-3 btn btn-primary">Sign Up</button>
+  </form>
+{%if messages%}
+{%for message in messages%}
+<div class = "alert alert-{{message.tags}}">
+  {{message}}
+</div>
+{%endfor%}
+{%endif%}
+<!--/Forms-->
+{% endblock %}
+
+ 
+
+
+
+>>>>>>> ae47d349eac8c113bab1658a255d14475f9f0c7f:SiHelp/users/templates/users/register.html

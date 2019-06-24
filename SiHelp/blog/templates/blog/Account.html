@@ -1,0 +1,144 @@
+{% extends "blog/layout.html" %}
+
+{% block content %}
+<!--ProfileIntro-->
+
+        <div class = "text-center pt-2 mb-5 ">
+                <hr style = "background-Color:#109dc0; position:relative; left:25%;" width = 50%;>
+
+        <h2 class = "text-primary">Details</h2>
+        
+        <hr style = "background-Color:#109dc0; position:relative; left:25%;" width = 50%;>
+      </div>
+      <!--/ProfileIntro-->  
+
+        <!--Profile-->
+
+
+
+        <div class = "wholepost mt-5">
+                <div class = " posts rounded">
+
+        
+        <div class="row mt-4">
+                <div class="col-6  pt-2 ">
+                    {% load static %}    
+                    <img src="{% static 'blog/Juliet.jpg' %}" width= "140px" class="rounded-circle photo-post"  alt="Cinque Terre">
+                    <div id = "EditView">
+                        <button type = "button" class = " pt-2 btn btn-outline-info btn-lg btn-block">
+                            Edit
+                          </button>
+                                                 </div>
+                        <div class="vl"></div>
+
+
+                    </div>
+
+                <div class="col-6 text-center pb-2  pr-4">
+                  <div class = "pb-2">
+                                <div><strong>Email:</strong></div>
+                              <div>{{user.email}}</div>
+                            </div>
+                            <div class = "pb-2">
+                              <div><strong>Major:</strong></div>
+                              <div>Big Booty Galor</div>
+                            </div>
+                              <div class = "pb-2">
+                              <div><strong>Number:</strong></div>
+                              <div>0422676860</div>
+                              </div>
+                              <div class = "pb-2">
+                                <div><strong>Age:</strong></div>
+                                <div>22</div>
+                                <div></div>
+            </div>
+
+
+            </div>
+              </div>
+            </div>
+        </div>
+
+
+        <!--/Profile-->
+              <!--Advert Intro-->  
+
+        <div class = "text-center pt-2 mt-5 mb-5 ">
+            <hr style = "background-Color:#109dc0; position:relative; left:25%;" width = 50%;>
+                
+        <h2 class = "text-primary">Adverts</h2>
+        
+        <hr style = "background-Color:#109dc0; position:relative; left:25%;" width = 50%;>
+      </div>
+
+              <!--/Advert Intro-->  
+
+        <!--Main Content-->
+
+                      
+        <!--Main Content-->
+        {% for n in range %}
+
+        <div class = "wholepost mt-5">
+                <div class = " posts rounded">
+        <h4 class = "text-center mr-3">Ad {{n}}</h4>
+        <hr style = "background-Color:#109dc0; position:relative;" width = 100%;>
+        <div class="row">
+                <div class="col-6  pt-2 ">
+                    {% load static %}    
+                    <img src="{% static 'blog/Juliet.jpg' %}" width= "140px" class="rounded-circle photo-post"  alt="Cinque Terre">
+                    <div id = "EditView">
+                        <button type = "button" class = " pt-2 btn btn-outline-info btn-lg btn-block">
+                            Edit
+                          </button>
+                                                 </div>
+
+
+                        <div class="vl"></div>
+
+
+                    </div>
+
+                <div class="col-6 text-center pb-2  pr-4">
+                  <div class = "pb-2">
+                  <div><strong>Year:</strong></div>
+                <div>3rd year of Data Science</div>
+              </div>
+              <div class = "pb-2">
+                <div><strong>Major:</strong></div>
+                <div>Big Booty Galor</div>
+              </div>
+                <div class = "pb-2">
+                <div><strong>Number:</strong></div>
+                <div>0422676860</div>
+                </div>
+                <div class = "pb-2">
+                  <div><strong>Number:</strong></div>
+                  <div>300 /hr</div>
+                  </div>
+                  <div id = "DeleteForced">
+                      <button type = "button" class = "btn mr-5 btn-outline-danger btn-lg btn-block ">
+                          Delete
+                       </button>
+                       </div>
+            </div>
+     
+
+            </div>
+              </div>
+            </div>
+
+{% endfor %}
+
+            
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
