@@ -1,3 +1,11 @@
+
+.custom-file-input, .custom-file-label{
+  cursor: pointer;
+}
+.custom-file-input:hover, .custom-file-label:hover{
+  outline: blue 2px solid ;
+}
+
 .photovue{
 position:relative;
 bottom:100px;

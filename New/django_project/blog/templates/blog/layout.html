@@ -134,62 +134,22 @@
                                   <v-btn  color="info" type = "submit"dark>Login</v-btn>
                                 </v-flex>
 
-                                  <!--SignUp Modal-->
-                                <v-dialog v-model="signupdialog" max-width="600px" >
 
-                                <template v-slot:activator="{ on }">
 
 
                                 <v-btn 
                                 class="mx-0 mb-3"  
                                 large
-                                color = "grey"
-                                dark v-on="on"
+                                dark
+                                color = "warning nodecor"
+                                href = "/register"
+
                               >
                           
                                 Need to register?
                               </v-btn>
-                            </template>
-                            <v-layout column>
-                                <v-layout column>
+                           
 
-                            <v-card>
-                                <v-flex text-center mt-5 >
-                                    <v-card-content class = "  display-1 font-weight-light mb-3">What type of user are you?</v-card-content>
-                                </v-flex>
-                                <v-card-content>
-                                <v-flex text-center>
-                                <v-layout column>
-                                  <v-flex mt-5 mb-2 mx-5>
-                                    <v-btn 
-                                    class="mx-0 mb-3 nodecor"  
-                                    large
-                                    color = "info"
-                                    href = "/register"
-
-                                  >
-                                  Become a student
-                                </v-btn>
-
-                                </v-flex>
-
-                                <v-flex mb-5 mx-5>
-                                    <v-btn 
-                                    class="mx-0 mb-3 nodecor"  
-                                    large
-                                    color = "info"
-                                    href = "/registerT"
-                                  >
-                                            Become a tutor
-                                </v-btn>
-                                </v-flex>
-                                </v-layout>
-                              </v-flex>
-                            </v-card-content>
-                            </v-card>
-                          </v-layout>
-
-                            <!--/SignUp Modal-->
 
 </v-dialog>
 
