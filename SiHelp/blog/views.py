@@ -38,8 +38,8 @@ class PostDetailView(DetailView):
     
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Ad
-    fields = ['subject', 'unit', 'description']
-    success_url = 'blog-home'
+    fields = ['title','subject', 'unit', 'description']
+    success_url = '/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user

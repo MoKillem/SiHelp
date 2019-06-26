@@ -9,6 +9,7 @@ from django.urls import reverse
 
 class Ad(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default = "Hey, I am here to help you")
     date = models.DateTimeField(default=timezone.now)
     subject = models.CharField(max_length=100) #or use foreign key
     unit = models.CharField(max_length=100, blank=True)
