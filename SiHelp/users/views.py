@@ -3,6 +3,9 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def register(request):
@@ -15,6 +18,8 @@ def register(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             login(request, user)
             return redirect('createprofile')
+        else:
+            print(form.errors)
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
@@ -46,6 +51,9 @@ def profile(request):
             p_form.save()
             messages.success(request, f'Your account information is updated')
             return redirect('profile')
+        else:
+            print(u_form.errors)
+            print(p_form.errors)
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance= request.user.profile)

@@ -74,8 +74,10 @@ def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
-  
-    return render(request, 'blog/TutorialPage.html',{'range': range(10)})
+    context = {
+        'ads': Ad.objects.all()
+    }
+    return render(request, 'blog/TutorialPage.html', context)
 
 def layout(request):
     context = {

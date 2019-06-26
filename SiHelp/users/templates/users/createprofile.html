@@ -15,7 +15,22 @@
         {% csrf_token %}
     
       <v-card   max-width = "600px" class ="mx-1">
-        
+          {% if form.errors %}
+      {% for field in form %}
+          {% for error in field.errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+                  
+              </div>
+          {% endfor %}
+      {% endfor %}
+      {% for error in form.non_field_errors %}
+          <div class=" mb-2 alert alert-danger">
+              <strong>{{ error|escape }}</strong>
+          </div>
+      {% endfor %}
+  {% endif %}
+  
       <v-layout      column>
           <v-card-text class = "text-xs-center mb-1 mt-4 font-weight-light display-1">
     Please Fill in all required fields 
