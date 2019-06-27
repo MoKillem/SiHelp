@@ -5,7 +5,18 @@
 .custom-file-input:hover, .custom-file-label:hover{
   outline: blue 2px solid ;
 }
+.delete{
+  color:white;
+  background-color:red;
+  font-size: 100px;
 
+}
+.delete:hover{  
+
+  cursor: pointer;
+
+
+}
 .create:hover{
   
     text-decoration: none;

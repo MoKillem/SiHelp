@@ -92,16 +92,17 @@
         <v-card light color="grey lighten-5" md-5 fluid>
           <v-flex pt-3 text-xs-center>
           <v-card-text  class = "display-1 font-weight-light ">
-           {{ad.author}} {{ad.author.last_name}} 
+           {{ad.author.first_name}} {{ad.author.last_name}} 
             <v-divider ></v-divider>
                </v-card-text>
                <v-layout  row justify-space-between  align-end >
                  
                   <v-flex xs5 offset-xs1  grow  class = "photovue">   
                     
-                                      {% load static %}    
-                  <v-img src="{% static 'blog/Juliet.jpg' %}"
-                  contain ></v-img >
+                                      {% load static %}  
+                      <v-img src="{{ ad.author.profile.pic.url }}"
+                                      contain ></v-img >  
+                 
                 
                </v-flex>
 
@@ -114,7 +115,7 @@
                   </div>
                     <div class = "pb-2 pt-3 ">
                     <div class = "pb-2"><strong>Number:</strong></div>
-                    <div>0422676860</div>
+                    <div>{{ad.author.phone}}</div>
                     </div>
                     <div class = "pb-2 pt-3">
                       <div class = "pb-2"><strong>Price:</strong></div>
