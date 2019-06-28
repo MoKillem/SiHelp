@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.decorators import login_required
 from .models import Ad
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 # from django.http import HttpResponse
 # Create your views here.
 
@@ -20,6 +21,9 @@ posts = [
         'date':'Aug 28, 2018',
     }
 ]
+
+searchfunction = True
+
 
 def home(request):
     context = {
@@ -67,15 +71,24 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         ad = self.get_object()
         if self.request.user == ad.author:
             return True
-        return False
+        return Falsess
 
 def about(request):
   
     return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
+    if request.method == 'GET':
+        search_query = request.GET.get('search_box', None)
+        if search_query is not None:
+            realAds = Ad.objects.filter(Q(subject__contains=search_query) | Q(unit__contains=search_query)).order_by("-date")
+        else:
+            realAds = Ad.objects.all()
+    else:
+        realAds = Ad.objects.all()
+
     context = {
-        'ads': Ad.objects.all()
+        'ads': realAds,
     }
     return render(request, 'blog/TutorialPage.html', context)
 

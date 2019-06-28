@@ -12,48 +12,28 @@
     <title>SiHelp</title>
       
 <body>
-    <div id="app">
+    <div class ="preload">
+     <h1> Please Wait...</h1>
+      {% load static %}  
+      <v-img src="{% static 'blog/loader.gif' %}"
+                      ></v-img >  
+    </div>
+    <div class ="app" id="app">
         <v-app>
         {% block modal %}
         {% endblock %}
 
 
-<!--Modal SignUp Ad-->
 
-
-
-<div class="modal fade" id="SignUpModal" tabindex="-1" role="dialog" aria-labelledby="SignUpModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="SignUpModalLabel">What type of user are you?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class ="text-center "><a href = "/register" class = "btn btn-large btn-outline-info  mb-2">I am looking for assignment help.</a></div>
-        <div class = "text-center"><a href = "/registerT"class = "btn btn-large btn-outline-info  mb-2">I want to help people with their assignments.</a></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--/Modal SignUp Ad-->
 
 
 
             <!--NavBar-->
-
             <v-toolbar dark color="primary" app>
                   <v-toolbar-title>
             <a class="navbarTitle text-white" href="/marketplace"><strong>Si-Help</strong></a></v-toolbar-title>
-            <v-spacer></v-spacer>
-                     
+        <v-spacer></v-spacer>
+      
                 {% if not user.is_authenticated %}
                 <v-toolbar-items class="hidden-sm-and-down">
                     <v-menu offset-y>
@@ -233,17 +213,30 @@
             </div>
 
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
-  
+  <script
+			  src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+        <script src= "{% static 'blog/TutorialPage.js' %}"></script>
+        <script>
+            $(function(){
+            
+              $(".preload").fadeOut(2000,function(){
+                $(".app").fadeIn(1000);
+            
+              })
+            })
+            
+            </script>
+		
   <script>
     new Vue({ el: '#app' })
   </script>
 {% load static %}    
-<script src= "{% static 'blog/TutorialPage.js' %}"></script>
 
 
   </body>

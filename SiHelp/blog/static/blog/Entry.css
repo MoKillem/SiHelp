@@ -1,4 +1,17 @@
-
+.app{
+  display:none;
+ 
+}
+.preload{
+  margin:0;
+  position:absolute;
+  top:50%;
+  left:50%;
+  
+}
+.centered{
+  position:relative;
+}
 .custom-file-input, .custom-file-label{
   cursor: pointer;
 }

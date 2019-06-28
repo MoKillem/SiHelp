@@ -75,15 +75,42 @@
 
       
   </div>
-              <!--/Right side Bar-->
 
-      
+      <v-container   grid-list-xl  >
+          <v-flex mt-5 xs12 offset-sm3  offset-md3 offset-lg2 sm-6 md-6 lg-10  app  >
 
+          <v-card light color="white" md-5 fluid>
+          <v-card-title class = "display-1 font-weight-light " >
+            Search for a Subject/Unit
+          </v-card-title>
 
+          <v-card-text text-center>
+          <form type="get" action=".">
+            <v-flex xs-12>
+          <v-text-field
+          class="mt-3"
+          flat
+          name="search_box"  
+          label="Search"
+          prepend-inner-icon="search"
+          solo-inverted
+        >  </v-text-field>
+            </v-flex>
+  
+            <v-flex >
+                <v-btn  type = "submit" color  = "warning">Search</span></v-btn>
+                <v-flex>
+  
+  
+      </form>
+    </v-card-text>
+    </v-card>
+   </v-container>    
 
-        <!--Main Content-->
-        
         <v-container   grid-list-xl  >
+          </v-flex>
+
+          
        {% for ad in ads %}
 
                         
@@ -92,7 +119,7 @@
         <v-card light color="grey lighten-5" md-5 fluid>
           <v-flex pt-3 text-xs-center>
           <v-card-text  class = "display-1 font-weight-light ">
-           {{ad.author.first_name}} {{ad.author.last_name}} 
+           {{ad.title}} 
             <v-divider ></v-divider>
                </v-card-text>
                <v-layout  row justify-space-between  align-end >
