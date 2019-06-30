@@ -43,9 +43,18 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Ad
 
-class UserDetailView(DeleteView):
+class UserDetailView(ListView):
     model = User
     template_name = 'blog/user_detail.html'
+    Ads = Ad
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        user = self.request.user
+        data['ads'] = Ad.objects.filter(author=user).order_by('-date')
+        data['user'] = user
+        return data
+
     
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Ad

@@ -106,9 +106,9 @@
     </v-card-text>
     </v-card>
    </v-container>    
+  </v-flex>
 
         <v-container   grid-list-xl  >
-          </v-flex>
 
           {% if ads|length > 0 %}
        {% for ad in ads %}
@@ -153,7 +153,7 @@
                         </div>
                       </v-card>
                       <v-card>
-                          <v-btn href = "/profilepage" class ="nodecor" block color="info">View Profile</v-btn>
+                          <v-btn href = "/user/{{ad.author.id}}" class ="nodecor" block color="info">View Profile</v-btn>
                         </v-card> 
                         
                </v-flex>
