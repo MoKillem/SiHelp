@@ -1,9 +1,12 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
-from .models import Ad
+from .models import Ad, Rate
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
+from .forms import CommentForm
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.models import User
+from users.models import Profile
 # from django.http import HttpResponse
 # Create your views here.
 
@@ -33,12 +36,16 @@ def home(request):
 
 class PostListView(ListView):
     model = Ad
-    template_name = 'blog/home.html'
+    template_name = 'blog/TutorialPage.html'
     context_object_name = 'ads'
     ordering = ['-date']
 
 class PostDetailView(DetailView):
     model = Ad
+
+class UserDetailView(DeleteView):
+    model = User
+    template_name = 'blog/user_detail.html'
     
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Ad
@@ -48,6 +55,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ad
@@ -71,7 +79,21 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         ad = self.get_object()
         if self.request.user == ad.author:
             return True
-        return Falsess
+        return False
+
+def add_comment_to_post(request, pk):
+    ad = get_object_or_404(Ad, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            rate = form.save(commit=False)
+            rate.ad_id = ad
+            rate.user_id = request.user
+            rate.save()
+            return redirect('ad-detail', pk=ad.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
 def about(request):
   

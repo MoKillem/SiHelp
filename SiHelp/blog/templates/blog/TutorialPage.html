@@ -110,7 +110,7 @@
         <v-container   grid-list-xl  >
           </v-flex>
 
-          
+          {% if ads|length > 0 %}
        {% for ad in ads %}
 
                         
@@ -171,9 +171,13 @@
       </v-container>
 
 
-                            
-                                                        
-
+      {%else%}                       
+      <v-container   grid-list-xl  >
+          <v-text text-center class = "display-1">No Ads found</v-text>
+           <v-divider inset></v-divider>                                                     
+     </v-container>
+     {%endif%}
+    
 
                             
 

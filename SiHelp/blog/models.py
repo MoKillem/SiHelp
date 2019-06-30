@@ -27,8 +27,6 @@ class Rate(models.Model):
     rating = models.IntegerField()
     user_id = models.ForeignKey(User,  on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.user_id
 
 class Subject(models.Model):
     code = models.CharField(max_length=100)
