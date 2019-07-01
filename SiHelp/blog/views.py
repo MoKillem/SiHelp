@@ -46,7 +46,6 @@ class PostDetailView(DetailView):
 class UserDetailView(ListView):
     model = User
     template_name = 'blog/user_detail.html'
-    Ads = Ad
     
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -99,16 +98,17 @@ def add_comment_to_post(request, pk):
             rate.ad_id = ad
             rate.user_id = request.user
             rate.save()
-            return redirect('ad-detail', pk=ad.pk)
+            return redirect('/')
     else:
         form = CommentForm()
-    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+    return redirect('/')
 
 def about(request):
   
     return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
+    rateArray = []
     if request.method == 'GET':
         search_query = request.GET.get('search_box', None)
         if search_query is not None:
@@ -117,9 +117,10 @@ def marketplace(request):
             realAds = Ad.objects.all()
     else:
         realAds = Ad.objects.all()
-
+  
     context = {
         'ads': realAds,
+        'rates':rateArray,
     }
     return render(request, 'blog/TutorialPage.html', context)
 

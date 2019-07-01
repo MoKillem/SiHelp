@@ -26,6 +26,8 @@ class Rate(models.Model):
     ad_id = models.ForeignKey(Ad, on_delete=models.CASCADE)
     rating = models.IntegerField()
     user_id = models.ForeignKey(User,  on_delete=models.CASCADE)
+    
+    
 
 
 class Subject(models.Model):
