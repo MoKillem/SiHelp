@@ -89,6 +89,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+@login_required
 def add_comment_to_post(request, pk):
     ad = get_object_or_404(Ad, pk=pk)
     if request.method == "POST":
