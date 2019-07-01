@@ -48,10 +48,10 @@ class UserDetailView(ListView):
     template_name = 'blog/user_detail.html'
     
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        user = self.request.user
+        data = super(UserDetailView, self).get_context_data(**kwargs)
+        user = self.kwargs.get('pk')
         data['ads'] = Ad.objects.filter(author=user).order_by('-date')
-        data['user'] = user
+        data['user'] = User.objects.get(id=user)
         return data
 
     
