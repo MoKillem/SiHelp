@@ -8,6 +8,12 @@ class UserRegisterForm(UserCreationForm):
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
     phone = forms.CharField(max_length=30)
+    
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if "@student.uwa.edu.au" not in data:   # any check you need
+            raise forms.ValidationError("Must be a UWA address")
+        return data
     class Meta:
         model = User
         fields = ['username','email','first_name','last_name','phone','password1','password2']

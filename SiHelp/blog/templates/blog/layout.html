@@ -35,7 +35,7 @@
         <v-spacer></v-spacer>
       
                 {% if not user.is_authenticated %}
-                <v-toolbar-items class="hidden-sm-and-down">
+                <v-toolbar-items >
                     <v-menu offset-y>
                         <v-btn flat slot="activator">
                           <v-icon left>expand_more</v-icon>
@@ -140,9 +140,9 @@
                      
     
                 {% else %}
-                <v-toolbar-items class="hidden-sm-and-down">
+                <v-toolbar-items >
                     
-                    <v-menu offset-y>
+                    <v-menu offset-y >
                         <v-btn flat slot="activator">
                           <v-icon left>expand_more</v-icon>
                           <span>Menu</span>

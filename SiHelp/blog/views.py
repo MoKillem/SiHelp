@@ -1,12 +1,14 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from .models import Ad, Rate
+from django.db.models import Avg, Max, Min, Sum
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from .forms import CommentForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from users.models import Profile
+import logging
 # from django.http import HttpResponse
 # Create your views here.
 
@@ -109,19 +111,16 @@ def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
-    rateArray = []
+    realAds = Ad.objects.all().order_by("-date").annotate(average_rating=Avg('rate__rating'))
     if request.method == 'GET':
-        search_query = request.GET.get('search_box', None)
-        if search_query is not None:
-            realAds = Ad.objects.filter(Q(subject__contains=search_query) | Q(unit__contains=search_query)).order_by("-date")
-        else:
-            realAds = Ad.objects.all()
-    else:
-        realAds = Ad.objects.all()
-  
+        if 'search' in request.GET:#order by search query
+            search_query = request.GET.get('search_box', None)
+            if search_query is not None:
+                realAds = Ad.objects.filter(Q(subject__contains=search_query) | Q(unit__contains=search_query)).order_by("-date").annotate(average_rating=Avg('rate__rating'))  
+        if 'highestrated' in request.GET:#order by rated
+            realAds = Ad.objects.annotate(average_rating=Avg('rate__rating')).order_by('-average_rating')
     context = {
         'ads': realAds,
-        'rates':rateArray,
     }
     return render(request, 'blog/TutorialPage.html', context)
 

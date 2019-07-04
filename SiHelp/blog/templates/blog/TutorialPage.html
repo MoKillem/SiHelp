@@ -24,9 +24,12 @@
      <!-- Button trigger modal -->
 
       <div class ="text-center">
-      <v-card-title>
-    <v-btn block  flat color="indigo lighten-3" dark>Highest Rated</v-btn>
-      </v-card-title>
+    <form type="get" action="." >
+        <v-card-title>
+        {% csrf_token %}
+    <v-btn block type = "submit" name = highestrated flat color="indigo lighten-3" dark>Highest Rated</v-btn>
+  </v-card-title>
+    </form>
       <v-card-title>
         <v-btn block flat color="indigo lighten-3" dark>Most Affordable</v-btn>
       </v-card-title>
@@ -35,10 +38,10 @@
     </v-card-title>
     {% if  user.is_authenticated %}
 <v-divider></v-divider>
-    <v-card-title>
+    <form action = "/post/new/">
+      <v-btn block type="submit" flat color="indigo lighten-3" dark>Create an Ad</v-btn>
 
-        <span class ="create" >  <v-btn block   flat color="indigo lighten-3" href ="/post/new/" light>Create an Ad</v-btn></span>
-      </v-card-title>
+    </form>
       {% endif %}
 
   </v-card>
@@ -78,7 +81,8 @@
             </v-flex>
   
             <v-flex >
-                <v-btn  type = "submit" color  = "warning">Search</span></v-btn>
+                <v-btn  type = "submit" color  = "warning"   name = search
+                >Search</v-btn>
                 <v-flex>
   
   
@@ -122,17 +126,23 @@
                   </div>
                     <div class = "pb-2 pt-3 ">
                     <div class = "pb-2"><strong>Number:</strong></div>
-                    <div>{{ad.author.phone}}</div>
+                    <div>{{ad.author.profile.phone}}</div>
                     </div>
                     <div class = "pb-2 pt-3">
                       <div class = "pb-2"><strong>Price:</strong></div>
                      
                       <div >300 /hr</div>
                       </div>
+                      <div class = "pb-2 pt-3">
+                        <div class = "pb-2"><strong>Rating:</strong></div>
+                        {{ad.average_rating}}
+
+                        <div ></div>
+                        </div>
                       
                       <v-dialog v-model="dialog" max-width="600px" >
                         <template v-slot:activator="{ on }">
-                          <v-btn   dark v-on="on" block color="warning">Rate</v-btn>
+                          <v-btn   dark v-on="on" block color="warning" class = "push">Rate</v-btn>
                         </template>  
                         <!--Update Modal-->
           
