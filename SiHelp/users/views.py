@@ -52,7 +52,7 @@ def createprofile(request):
         if p_form.is_valid():
             p_form.save()
             messages.success(request, f'Your account information is updated')
-            return redirect('profile')
+            return redirect('user-profile')
     else:
         p_form = ProfileUpdateForm(instance= request.user.profile)
     context = {
@@ -68,12 +68,12 @@ def profile(request):
     if(request.method) == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        if 'Update' in request.post:
+        if 'Update' in request.POST:
             if u_form.is_valid() and p_form.is_valid():
                 u_form.save()
                 p_form.save()
                 messages.success(request, f'Your account information is updated')
-                return redirect('profile')
+                return redirect('user-profile')
             else:
                 print(u_form.errors)
                 print(p_form.errors)

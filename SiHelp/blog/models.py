@@ -14,6 +14,7 @@ class Ad(models.Model):
     subject = models.CharField(max_length=100) #or use foreign key
     unit = models.CharField(max_length=100, blank=True)
     description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, default = 25.00)
 
     def __str__(self):
         return self.subject

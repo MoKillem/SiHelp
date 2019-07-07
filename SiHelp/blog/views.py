@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from users.models import Profile
 import logging
+from django.urls import reverse, reverse_lazy
 # from django.http import HttpResponse
 # Create your views here.
 
@@ -59,7 +60,7 @@ class UserDetailView(ListView):
     
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Ad
-    fields = ['title','subject', 'unit', 'description']
+    fields = ['title','subject', 'unit', 'description','price']
     success_url = '/'
 
     def form_valid(self, form):
@@ -69,7 +70,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ad
-    fields = ['subject', 'unit', 'description']
+    fields = ['title','subject', 'unit', 'description','price']
+    success_url = reverse_lazy('user-profile')
     
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -83,7 +85,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Ad
-    success_url = '/'
+    success_url = reverse_lazy('user-profile')
 
     def test_func(self):
         ad = self.get_object()
@@ -96,12 +98,20 @@ def add_comment_to_post(request, pk):
     ad = get_object_or_404(Ad, pk=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
-        if form.is_valid():
+        exist = Rate.objects.filter(user_id=request.user, ad_id=ad)
+        if form.is_valid() and len(exist) == 0 and request.user.profile.tutor == False:
             rate = form.save(commit=False)
             rate.ad_id = ad
             rate.user_id = request.user
             rate.save()
             return redirect('/')
+        elif form.is_valid() and len(exist) != 0 and request.user.profile.tutor == False:
+            rate = exist.first()
+            rate.rating = form.cleaned_data['rating']
+            rate.save(update_fields=["rating"]) 
+            return redirect('/') #flash some message here
+        elif request.user.profile.tutor == True:
+            return redirect('blog-Entry')
     else:
         form = CommentForm()
     return redirect('/')
