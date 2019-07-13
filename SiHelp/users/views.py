@@ -86,11 +86,13 @@ def profile(request):
     ads = Ad.objects.filter(author = user).order_by("-date").annotate(average_rating=Round(Avg('rate__rating')))
     count = 0
     summed = 0
-    for ad in ads:
-        if (ad.average_rating):
-            summed += ad.average_rating 
-        count +=1
-    average_value = round(summed/count)
+    average_value = 0
+    if len(ads) != 0:
+        for ad in ads:
+            if (ad.average_rating):
+                summed += ad.average_rating 
+            count +=1
+        average_value = round(summed/count)
 
     if(request.method) == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
