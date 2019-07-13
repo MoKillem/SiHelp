@@ -1,16 +1,35 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db.models import Avg, Max, Min, Sum
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-from blog.models import Ad
+from blog.models import Ad,Rate
 from blog.views import PostDeleteView
+from django.template.defaulttags import register
+from django.db.models import Func
 import logging
 
 logger = logging.getLogger(__name__)
 
+@register.filter
+def get_range(value):
+    return range(value)
+@register.filter
+def subtract(value, arg):
+    return value - arg
+
+    
+@register.filter
+def rounding(value):
+    return round(value)
+    
+
+class Round(Func):
+    function = 'ROUND'
+    template='%(function)s(%(expressions)s, 0)'
 # Create your views here.
 @login_required
 def change_password(request):
@@ -64,7 +83,15 @@ def createprofile(request):
 @login_required
 def profile(request):
     user = request.user#acquire current user
-    ads = Ad.objects.filter(author=user).order_by('-date')# Filter ads
+    ads = Ad.objects.filter(author = user).order_by("-date").annotate(average_rating=Round(Avg('rate__rating')))
+    count = 0
+    summed = 0
+    for ad in ads:
+        if (ad.average_rating):
+            summed += ad.average_rating 
+        count +=1
+    average_value = round(summed/count)
+
     if(request.method) == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -84,7 +111,8 @@ def profile(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'ads':ads
+        'ads':ads,
+        'avg':average_value
     }
 
     return render(request, 'users/profile.html', context)

@@ -18,9 +18,9 @@
 
       <hr>
 
-    <h3  class ="text-center"> View Top Posts <h3>
+    <v-card-title  class ="text-center headline"> View Top Posts </v-card-title>
 
-    <hr>
+    <v-divider></v-divider>
      <!-- Button trigger modal -->
 
       <div class ="text-center">
@@ -30,12 +30,18 @@
     <v-btn block type = "submit" name = highestrated flat color="indigo lighten-3" dark>Highest Rated</v-btn>
   </v-card-title>
     </form>
+    <form type="get" action="." >
       <v-card-title>
-        <v-btn block flat color="indigo lighten-3" dark>Most Affordable</v-btn>
-      </v-card-title>
-        <v-card-title>
-    <v-btn block flat color="indigo lighten-3" dark>Verified Users</v-btn>
-    </v-card-title>
+      {% csrf_token %}
+  <v-btn block type = "submit" name = mostaffordable flat color="indigo lighten-3" dark>Affordable</v-btn>
+</v-card-title>
+  </form>
+  <form type="get" action="." >
+    <v-card-title>
+    {% csrf_token %}
+<v-btn block type = "submit" name = controversial flat color="indigo lighten-3" dark>Most Controversial</v-btn>
+</v-card-title>
+</form>
     {% if  user.is_authenticated %}
 <v-divider></v-divider>
     <form action = "/post/new/">
@@ -81,12 +87,18 @@
             </v-flex>
   
             <v-flex >
-                <v-btn  type = "submit" color  = "warning"   name = search
+              <span>  <v-btn  type = "submit" color  = "warning"   name = search
                 >Search</v-btn>
-                <v-flex>
-  
+                <v-btn color="primary" name = "refresh" dark type = "submit" name = "refresh">
+                    <v-icon  dark >refresh</v-icon>
+               </v-btn> 
+              </v-flex>
+
+                    
+
   
       </form>
+    
     </v-card-text>
     </v-card>
    </v-container>    
@@ -131,11 +143,33 @@
                     <div class = "pb-2 pt-3">
                       <div class = "pb-2"><strong>Price:</strong></div>
                      
-                      <div >{{ad.price}} /hr</div>
+                      <div >{{ad.price}}/hr</div>
                       </div>
                       <div class = "pb-2 pt-3">
+                        <div class = "pb-2"><strong>Rates:</strong></div>
+                       
+                        <div >{{ad.Counted}}</div>
+                        </div>
+                      <div class = "pb-2 pt-3">
                         <div class = "pb-2"><strong>Rating:</strong></div>
-                        {{ad.average_rating}}
+                        {% if ad.average_rating %}
+                        {% for n in ad.average_rating|rounding|get_range %}
+                        <span><v-icon large color="amber darken-2" style = "font-size : 20px;">star</v-icon></span>
+                        {%endfor%}
+                        {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
+                        
+                        <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
+
+                        {%endfor%}
+              
+                        {%else%}
+                        {%for i in 10|get_range %}
+                        
+                        <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
+
+                        {%endfor%}
+                        {%endif%}
+                        
 
                         <div ></div>
                         </div>

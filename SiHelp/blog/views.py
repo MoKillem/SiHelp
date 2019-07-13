@@ -1,17 +1,22 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from .models import Ad, Rate
-from django.db.models import Avg, Max, Min, Sum
+from django.db.models import Avg, Max, Min, Sum, Count
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
 from .forms import CommentForm
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
+from django.db.models import Func
 from users.models import Profile
+from django.template.defaulttags import register
 import logging
 from django.urls import reverse, reverse_lazy
+import pickle
+import uuid 
 # from django.http import HttpResponse
 # Create your views here.
+
 
 posts = [
     {
@@ -28,8 +33,22 @@ posts = [
     }
 ]
 
-searchfunction = True
+@register.filter
+def get_range(value):
+    return range(value)
+@register.filter
+def subtract(value, arg):
+    return value - arg
 
+    
+@register.filter
+def rounding(value):
+    return round(value)
+
+
+class Round(Func):
+    function = 'ROUND'
+    template='%(function)s(%(expressions)s, 0)'
 
 def home(request):
     context = {
@@ -53,7 +72,19 @@ class UserDetailView(ListView):
     def get_context_data(self, **kwargs):
         data = super(UserDetailView, self).get_context_data(**kwargs)
         user = self.kwargs.get('pk')
-        data['ads'] = Ad.objects.filter(author=user).order_by('-date')
+        ads = Ad.objects.filter(author = user).order_by("-date").annotate(average_rating=Avg('rate__rating'))
+        data['ads'] = ads
+        count = 0
+        summed = 0
+        for ad in ads:
+            if (ad.average_rating):
+                summed += ad.average_rating 
+            count +=1
+        average=round(summed/count)
+        SubtractedAverage = 10 -average
+        data['range'] = range(0,average)
+        data['invertedRange'] = range(0,SubtractedAverage)
+        data['avg'] = average
         data['user'] = User.objects.get(id=user)
         return data
 
@@ -121,14 +152,44 @@ def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
-    realAds = Ad.objects.all().order_by("-date").annotate(average_rating=Avg('rate__rating'))
+    realAds = Ad.objects.all().order_by("-date").annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating'))
     if request.method == 'GET':
         if 'search' in request.GET:#order by search query
             search_query = request.GET.get('search_box', None)
             if search_query is not None:
-                realAds = Ad.objects.filter(Q(subject__contains=search_query) | Q(unit__contains=search_query)).order_by("-date").annotate(average_rating=Avg('rate__rating'))  
+                realAds = Ad.objects.filter(Q(subject__contains=search_query) | Q(unit__contains=search_query) | Q(title__contains=search_query) | Q(description__contains=search_query)).order_by("-date").annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating'))      
+                request.session['search'] = search_query
+            else:
+                realAds = Ad.objects.all().annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating'))      
+
+        if 'refresh'in request.GET:
+            realAds = Ad.objects.all().annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating'))      
+
+
         if 'highestrated' in request.GET:#order by rated
-            realAds = Ad.objects.annotate(average_rating=Avg('rate__rating')).order_by('-average_rating')
+            search_request = request.session.get('search')
+            if search_request is not None:
+                realAds = Ad.objects.filter(Q(subject__contains=search_request) | Q(unit__contains=search_request) | Q(title__contains=search_request) | Q(description__contains=search_request)).annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating')).order_by('-average_rating')       
+            else:
+                realAds = Ad.objects.annotate(average_rating=Avg('rate__rating')).order_by('-average_rating')
+
+        if 'mostaffordable' in request.GET:#order by rated
+            search_request = request.session.get('search')
+            if search_request is not None:
+                realAds = Ad.objects.filter(Q(subject__contains=search_request) | Q(unit__contains=search_request) | Q(title__contains=search_request) | Q(description__contains=search_request)).annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating')).order_by('price')       
+            else:
+                realAds = Ad.objects.all().annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating')).order_by('price')
+
+        if 'controversial' in request.GET:#order by rated
+            search_request = request.session.get('search')
+            if search_request is not None:
+                realAds = Ad.objects.filter(Q(subject__contains=search_request) | Q(unit__contains=search_request) | Q(title__contains=search_request) | Q(description__contains=search_request)).annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating')).order_by('-Counted')       
+            else:
+                realAds = Ad.objects.all().annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating')).order_by('-Counted')
+
+
+
+
     context = {
         'ads': realAds,
     }

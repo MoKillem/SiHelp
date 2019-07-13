@@ -29,17 +29,18 @@
 
 
             <!--NavBar-->
-            <v-toolbar dark color="primary" app>
+            <v-toolbar dark color="primary" height= "90px" app>
                   <v-toolbar-title>
-            <a class="navbarTitle text-white" href="/"><strong>Si-Help</strong></a></v-toolbar-title>
+            <a class="navbarTitle text-white  " href="/"><strong style = "font-size:55px;" >Si-Help</strong></a></v-toolbar-title>
         <v-spacer></v-spacer>
       
                 {% if not user.is_authenticated %}
                 <v-toolbar-items >
                     <v-menu offset-y>
-                        <v-btn flat slot="activator">
+                        <v-btn class ="pr-5"  flat slot="activator" style = "font-size:20px;">
                           <v-icon left>expand_more</v-icon>
-                          <span>Menu</span>
+                          
+                          <span >Menu</span>
                         </v-btn>
                         <v-list>
                           <v-list-tile>
@@ -55,7 +56,7 @@
                     <!--Login Modal-->
                     <v-dialog v-model="dialog" max-width="600px" >
                       <template v-slot:activator="{ on }">
-                        <v-btn flat class ="nodecor " dark v-on="on">Login
+                        <v-btn flat class ="nodecor " dark v-on="on" style = "font-size:20px;">Login
                         <v-icon right >exit_to_app</v-icon></v-btn>
                       </template>
                   <v-layout column>
@@ -142,8 +143,8 @@
                 {% else %}
                 <v-toolbar-items >
                     
-                    <v-menu offset-y >
-                        <v-btn flat slot="activator">
+                    <v-menu  offset-y >
+                        <v-btn class ="pr-5" flat slot="activator" style = "font-size:20px;">
                           <v-icon left>expand_more</v-icon>
                           <span>Menu</span>
                         </v-btn>
@@ -162,7 +163,7 @@
                         </v-list>
                       </v-menu>
 
-                    <v-btn flat class ="nodecor" href="/logout"><span>Logout</span>
+                    <v-btn flat class ="nodecor" style = "font-size:20px;" href="/logout"><span>Logout</span>
                     <v-icon right >exit_to_app</v-icon>
                     </v-btn>
                    

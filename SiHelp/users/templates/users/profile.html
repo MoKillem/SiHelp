@@ -12,7 +12,8 @@
         <v-card light color="grey lighten-5" md-5 fluid>
           <v-flex pt-3 text-xs-center>
           <v-card-text  class = "display-1 font-weight-light ">
-                {{ user.first_name }} {{ user.last_name }}
+
+                {{ user.first_name }} {{ user.last_name }} 
                             <v-divider ></v-divider>
                </v-card-text>
                <v-layout  row justify-space-between  align-end >
@@ -38,8 +39,14 @@
                     </div>
                     <div class = "pb-2 pt-3">
                       <div class = "pb-2"><strong>Your rating</strong></div>
-                      <div >9/10</div>
-                      <div>{{ user.profile.tutor }}</div>
+                                  {% for n in avg|get_range %}
+                                  <span><v-icon large color="amber darken-2" style = "font-size : 20px;">star</v-icon></span>
+                                  {%endfor%}
+                                  {%for i in 10|subtract:avg|get_range %}
+                                  
+                                  <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
+
+                                  {%endfor%}
                       <v-dialog v-model="dialog" max-width="600px" >
                     <template v-slot:activator="{ on }">
                       <v-btn dark v-on="on" block color="warning" class = "push">Change My details</v-btn>
@@ -294,19 +301,44 @@
                 <v-flex xs6   pb-5 class = "  font-weight-light subheading centerInfo" grow wrap>
                   <div>
                     <v-card fluid>
-                   <div class = "pb-2 pt-3">
-                       <div class = "pb-2" ><strong>I will help you with...</strong></div>
-                     <div>{{ad.subject.upper}} : {{ad.unit.upper}}</div>
-                   </div>
-                     <div class = "pb-2 pt-3 ">
-                     <div class = "pb-2"><strong>Number:</strong></div>
-                     <div>{{ad.author.profile.phone}}</div>
-                     </div>
-                     <div class = "pb-2 pt-3">
-                       <div class = "pb-2"><strong>Price:</strong></div>
-                       <div >300 /hr</div>
+                        <div class = "pb-2 pt-3">
+                            <div class = "pb-2" ><strong>I will help you with...</strong></div>
+                          <div>{{ad.subject.upper}} : {{ad.unit.upper}}</div>
+                        </div>
+                          <div class = "pb-2 pt-3 ">
+                          <div class = "pb-2"><strong>Number:</strong></div>
+                          <div>{{ad.author.profile.phone}}</div>
+                          </div>
+                          <div class = "pb-2 pt-3">
+                              <div class = "pb-2"><strong>Price:</strong></div>
+                             
+                              <div >{{ad.price}} /hr</div>
+                              </div>
+                              <div class = "pb-2 pt-3">
+                                <div class = ""><strong>Rating:</strong></div>
+                                {% if ad.average_rating %}
+                                {% for n in ad.average_rating|rounding|get_range %}
+                                <span><v-icon large color="amber darken-2" style = "font-size : 20px;">star</v-icon></span>
+                                {%endfor%}
+                                {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
+                                
+                                <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
+        
+                                {%endfor%}
+                      
+                                {%else%}
+                                {%for i in 10|get_range %}
+                                
+                                <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
+        
+                                {%endfor%}
+                                {%endif%}
+                                
+                              </div>
+                                <div  class = "push" ><v-btn  href ="/post/{{ad.id}}/update/" block color="warning" class = "nodecor ">Edit</v-btn></div>
+                                </div>
                        </div>
-                       <v-btn  href ="/post/{{ad.id}}/update/" block color="warning" class = "nodecor">Edit</v-btn>
+                       
  
                          </div>
                          
