@@ -85,7 +85,14 @@ class UserDetailView(ListView):
         data['range'] = range(0,average)
         data['invertedRange'] = range(0,SubtractedAverage)
         data['avg'] = average
-        data['user'] = User.objects.get(id=user)
+        data['mockuser'] = User.objects.get(id=user)
+        realuser = self.request.user
+        if user is not None:
+            data['user'] = realuser
+        else:
+            data['user'] = None
+
+
         return data
 
     
@@ -152,6 +159,7 @@ def about(request):
     return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
+    user = request.user
     realAds = Ad.objects.all().order_by("-date").annotate(average_rating=Avg('rate__rating')).annotate(Counted=Count('rate__rating'))
     if request.method == 'GET':
         if 'search' in request.GET:#order by search query
@@ -192,6 +200,7 @@ def marketplace(request):
 
     context = {
         'ads': realAds,
+        'user': user
     }
     return render(request, 'blog/TutorialPage.html', context)
 

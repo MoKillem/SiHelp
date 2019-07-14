@@ -15,8 +15,8 @@
         {% csrf_token %}
     
       <v-card   max-width = "600px" class ="mx-1">
-          {% if form.errors %}
-      {% for field in form %}
+          {% if p_form.errors %}
+      {% for field in p_form %}
           {% for error in field.errors %}
               <div class="alert alert-danger">
                   <strong>{{ error|escape }}</strong>
@@ -24,7 +24,7 @@
               </div>
           {% endfor %}
       {% endfor %}
-      {% for error in form.non_field_errors %}
+      {% for error in p_form.non_field_errors %}
           <div class=" mb-2 alert alert-danger">
               <strong>{{ error|escape }}</strong>
           </div>
@@ -39,26 +39,25 @@
   </v-card-text>
    
     <v-divider class = "mx-5 mb-5" ></v-divider>
-    <v-flex   mx-5>
-      
-                <v-checkbox mt-3
-                
-                type="checkbox" 
-                name="tutor"
-              label =" Check this box if you want to be be a tutor/assignment helper."
-              ></v-checkbox>
-            </v-flex>
-    
-            <v-flex  mt-3 mx-5>
+    <v-flex ml-5>
+        <label id = "checkboxcreateprofile"class = "subheading">Check box to be a tutor, leave it empty to become a student. </label>
+        
+          </v-flex>
+          <v-flex ml-5>
+              <input type="checkbox" name="tutor"  id="id_tutor" class=" mr-2 ">
+  
+  
+          </v-flex>
+          
+          <v-flex  mt-3 mx-5>
+          
+          <div class="custom-file">
+              <label class="custom-file-label" for="customFileLang">Upload Profile Picture</label>
+              <input type="file" class="custom-file-input" id="customFileLang" name = "pic" accept ="image/*">
+            </div>
            
-                <div class="custom-file">
-                    <label class="custom-file-label" for="customFileLang">Upload Profile Picture</label>
-                    <input type="file" class="custom-file-input" id="customFileLang" name = "pic" accept ="image/*">
-                  </div>
-                 
-
-            </v-flex>
-    
+          
+          </v-flex>
        
             <v-flex  mx-5 mt-4 mb-3 >
                <v-btn type="submit" block large color = "warning">Submit</v-btn>
@@ -72,3 +71,6 @@
     </v-layout>
     </v-container>
 {% endblock %}
+
+
+

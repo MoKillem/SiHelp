@@ -30,6 +30,13 @@
                  <div>
                    <v-card fluid>
                   <div class = "pb-2 pt-3">
+                      <div class = "pb-2" ><strong>Status</strong></div>
+                      {% if user.profile.tutor %}
+                      <div>Tutor</div>
+                      {%else%}
+                      <div>Student</div>
+                      {%endif%}
+                  
                       <div class = "pb-2" ><strong>Your email</strong></div>
                     <div>{{ user.email }}</div>
                   </div>
@@ -89,16 +96,6 @@
                                           </v-flex>
                                           {% endfor %}
                                           
-                                          <v-flex mt-3>
-
-                                          <v-checkbox 
-                                                    
-                                          type="checkbox" 
-                                          name="identity"
-                                           id="id_identity"
-                                          label =" Check this box if you want to be be a tutor/assignment helper."
-                                          ></v-checkbox>
-                                          </v-flex>
                                           <v-flex mt-3 >
                                           
                                                 <div class="custom-file">

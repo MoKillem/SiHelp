@@ -1,3 +1,20 @@
+input[type='checkbox'] {
+  -webkit-appearance:none;
+  width:30px;
+  height:30px;
+  background:white;
+  border-radius:5px;
+  border:2px solid rgb(228, 225, 225);
+}
+input[type='checkbox']:checked {
+  background: rgb(243, 138, 0);
+}
+
+#checkboxcreateprofile{
+  position:relative;
+  bottom:6px;
+}
+
 .push{
   position:relative;
   top: 13px;

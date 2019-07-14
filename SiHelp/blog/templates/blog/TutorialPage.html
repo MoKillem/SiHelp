@@ -43,11 +43,16 @@
 </v-card-title>
 </form>
     {% if  user.is_authenticated %}
+    {% if user.profile.tutor %}
+
 <v-divider></v-divider>
+
     <form action = "/post/new/">
       <v-btn block type="submit" flat color="indigo lighten-3" dark>Create an Ad</v-btn>
 
     </form>
+    {%else%}
+    {%endif%}
       {% endif %}
 
   </v-card>
@@ -173,7 +178,7 @@
 
                         <div ></div>
                         </div>
-                      
+                        {% if user.profile.tutor %}
                       <v-dialog v-model="dialog" max-width="600px" >
                         <template v-slot:activator="{ on }">
                           <v-btn   dark v-on="on" block color="warning" class = "push">Rate</v-btn>
@@ -255,8 +260,9 @@
 
 
 
+                                {%else %}
 
-
+                                {%endif%}
 
 
 

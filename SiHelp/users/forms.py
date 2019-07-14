@@ -30,7 +30,7 @@ class UserUpdateForm(forms.ModelForm):
         fields = ['username','email','first_name','last_name','phone']
 
 class ProfileUpdateForm(forms.ModelForm):
-    tutor = forms.BooleanField()
+    tutor = forms.BooleanField(required = False, initial=False)
     class Meta:
         model = Profile
         fields = ['tutor','pic']
