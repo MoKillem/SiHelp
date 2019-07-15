@@ -35,15 +35,17 @@
         <v-spacer></v-spacer>
       
                 {% if not user.is_authenticated %}
-                 <!--Register-->
-
-                 <v-btn flat class ="nodecor" style = "font-size:20px;" href="/register"><span>Register</span>
-                  <v-icon right >group_add</v-icon>
-                  </v-btn>
-                                      <!--/Register-->
+                 
 
                                       
                 <v-toolbar-items >
+<!--Register-->
+
+<v-btn flat class ="nodecor" style = "font-size:20px;" href="/register"><span>Register</span>
+  <v-icon right >group_add</v-icon>
+  </v-btn>
+                      <!--/Register-->
+
                     <v-menu offset-y>
                         <v-btn class ="pr-5"  flat slot="activator" style = "font-size:20px;">
                           <v-icon left>expand_more</v-icon>
@@ -87,7 +89,6 @@
                                   
                                     <v-text-field
                                     name = 'username'
-                                    :counter="30"
                                     label="Username"
                                     required
                                     prepend-icon="face"
@@ -98,7 +99,6 @@
                                   <v-text-field
                                   name='password'
                                   :type="'password'"
-                                    :counter="30"
                                     label="Password"
                                     required
                                     prepend-icon="storage"
@@ -210,7 +210,7 @@
               {% for field in form %}
                   {% for error in field.errors %}
                       <div class="alert alert-danger">
-                          <strong>{{ error|escape }}</strong>
+                          <strong>An error occurred with your {{field.label}}: {{ error|escape }}</strong>
                           
                       </div>
                   {% endfor %}

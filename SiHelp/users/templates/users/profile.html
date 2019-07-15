@@ -79,21 +79,39 @@
                                          
 
                                               {% for field in u_form %}
-                                          
-                                          <v-flex mt-3>
-                                              <v-text-field
-                                              :counter="20"
-                                              name="{{ field.name }}"
-                                              id="id_{{ field.name }}"
-                                              label = "{{ field.label }}"
-                                              value = {{field.value}}
-                                              large
-                                             hint = "{{ field.help_text }}"
-                                                     persistent-hint
-                                              box
-                                            ></v-text-field>
+
+
+                                              {% if "phone" == field.name %}
                                             
-                                          </v-flex>
+                                              <v-flex mt-3  mx-5>
+                                                      <v-text-field
+                                                      name="{{ field.name }}"
+                                                      id="id_{{ field.name }}"
+                                                      label = "{{ field.label }}"
+                                                      large
+                                                     hint = "{{ field.help_text }}"
+                                                             persistent-hint
+                                                      box
+                                                      value = {{user.profile.phone}}
+                                                    ></v-text-field>
+                                                    
+                                                  </v-flex>
+                                         {%else%}
+                                         <v-flex mt-3  mx-5>
+                                            <v-text-field
+                                            name="{{ field.name }}"
+                                            id="id_{{ field.name }}"
+                                            label = "{{ field.label }}"
+                                            large
+                                           hint = "{{ field.help_text }}"
+                                                   persistent-hint
+                                            box
+                                            value = {{field.value}}
+                                          ></v-text-field>
+                                          
+                                        </v-flex>
+                                         {%endif%}
+                                            
                                           {% endfor %}
                                           
                                           <v-flex mt-3 >
@@ -156,9 +174,8 @@
               </v-flex>
               {% if p_form.errors or u_form.errors %}
               <div class="alert alert-danger">
-                    <strong>Your changes haven't been saved!</strong>
-                      <strong>{{ error|escape }}</strong>
-                      
+                    <strong>Your changes have not been saved!</strong>
+                      <br>
                   </div>
                   {%endif%}
               {% if p_form.errors %}
@@ -166,7 +183,7 @@
               {% for field in p_form %}
                   {% for error in field.errors %}
                       <div class="alert alert-danger">
-                          <strong>{{ error|escape }}</strong>
+                          <strong>An error occurred with your {{field.label}}: {{ error|escape }}</strong>
                           
                       </div>
                   {% endfor %}
@@ -184,14 +201,14 @@
               {% for field in u_form %}
                   {% for error in field.errors %}
                       <div class="alert alert-danger">
-                          <strong>{{ error|escape }}</strong>
+                          <strong>An error occurred with your {{field.label}}:   {{ error|escape }}</strong>
                           
                       </div>
                   {% endfor %}
               {% endfor %}
               {% for error in u_form.non_field_errors %}
                   <div class=" mb-2 alert alert-danger">
-                      <strong>{{ error|escape }}</strong>
+                      <strong> {{ error|escape }}</strong>
                   </div>
               {% endfor %}
             {% endif %}
