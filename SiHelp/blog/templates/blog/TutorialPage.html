@@ -18,7 +18,7 @@
 
       <hr>
 
-    <v-card-title  class ="text-center headline"> View Top Posts </v-card-title>
+    <v-card-text class =" headline font-weight-thin text-center"> View Top Posts </v-card-text>
 
     <v-divider></v-divider>
      <!-- Button trigger modal -->
@@ -70,7 +70,7 @@
       
   </div>
 
-      <v-container   grid-list-xl  >
+      <v-container   grid-list-clas  >
           <v-flex mt-5 xs12 offset-sm3  offset-md3 offset-lg2 sm-6 md-6 lg-10  app  >
 
           <v-card light color="white" md-5 fluid>
@@ -109,193 +109,64 @@
    </v-container>    
   </v-flex>
 
-        <v-container   grid-list-xl  >
+        <v-container   >
 
           {% if ads|length > 0 %}
        {% for ad in ads %}
+       <div class="card">
+          <v-card-title class = "display-1 font-weight-thin text-centered "> <span class = "textbox">{{ad.title}}</span> 
+  <v-spacer></v-spacer>
+  {% if ad.average_rating %}
+  {% for n in ad.average_rating|rounding|get_range %}
+  <span><v-icon color="amber darken-2"  class = "starry" >star</v-icon></span>
+  {%endfor%}
+  {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
+  
+  <span><v-icon color="gray darken-2  " class = "starry">star</v-icon></span>
 
-                        
+  {%endfor%}
 
-       <v-flex mt-5 xs12 offset-sm3  offset-md3 offset-lg2 sm-6 md-6 lg-10  app  >
-        <v-card light color="grey lighten-5" md-5 fluid>
-          <v-flex pt-3 text-xs-center>
-          <v-card-text  class = "display-1 font-weight-light ">
-           {{ad.title}} 
-            <v-divider ></v-divider>
-               </v-card-text>
-               <v-layout  row justify-space-between  align-end >
-                 
-                  <v-flex xs5 offset-xs1  grow  class = "photovue">   
-                    
-                                      {% load static %}  
-                      <v-img src="{{ ad.author.profile.pic.url }}"
-                                      contain ></v-img >  
-                 
-                
-               </v-flex>
+  {%else%}
+  {%for i in 10|get_range %}
+  
+  <span><v-icon  color="gray darken-2" class = "starry" >star</v-icon></span>
 
-               <v-flex xs6   pb-5 class = "  font-weight-light subheading centerInfo" grow wrap>
-                 <div>
-                   <v-card fluid>
-                  <div class = "pb-2 pt-3">
-                      <div class = "pb-2" ><strong>I will help you with...</strong></div>
-                    <div>{{ad.subject.upper}} : {{ad.unit.upper}}</div>
-                  </div>
-                    <div class = "pb-2 pt-3 ">
-                    <div class = "pb-2"><strong>Number:</strong></div>
-                    <div>{{ad.author.profile.phone}}</div>
+  {%endfor%}
+  {%endif%}
+          </v-card-title>
+          <v-divider class ="divider"></v-divider>
+          <div class ="imager">
+            <v-avatar
+            tile
+          size="130"
+          color="grey lighten-4"
+        >
+          <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
+        </v-avatar>
+        </div>
+            <div class="con1">
+                <v-card-title primary-title>
+                    <div class = "innercontainer">
+                      <div class="headline">Mohamed Yusuf</div>
+                      <div class = "units">Teaches : {{ad.subject.capitalize}} - {{ad.unit.capitalize}}</div>
+                      <div>Contact : {{ad.author.profile.phone}}</div>
+                      <div>Price   : {{ad.price}}$/hr</div>
+                      <div  ><v-btn  class="ma-0 button2" block small dark color = " amber darken-2">Hey</v-btn></div>
                     </div>
-                    <div class = "pb-2 pt-3">
-                      <div class = "pb-2"><strong>Price:</strong></div>
-                     
-                      <div >{{ad.price}}/hr</div>
-                      </div>
-                      <div class = "pb-2 pt-3">
-                        <div class = "pb-2"><strong>Rates:</strong></div>
-                       
-                        <div >{{ad.Counted}}</div>
-                        </div>
-                      <div class = "pb-2 pt-3">
-                        <div class = "pb-2"><strong>Rating:</strong></div>
-                        {% if ad.average_rating %}
-                        {% for n in ad.average_rating|rounding|get_range %}
-                        <span><v-icon large color="amber darken-2" style = "font-size : 20px;">star</v-icon></span>
-                        {%endfor%}
-                        {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
-                        
-                        <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
-
-                        {%endfor%}
-              
-                        {%else%}
-                        {%for i in 10|get_range %}
-                        
-                        <span><v-icon large color="gray darken-2 " style = "font-size : 20px;">star</v-icon></span>
-
-                        {%endfor%}
-                        {%endif%}
-                        
-
-                        <div ></div>
-                        </div>
-                        {% if user.profile.tutor %}
-                      <v-dialog v-model="dialog" max-width="600px" >
-                        <template v-slot:activator="{ on }">
-                          <v-btn   dark v-on="on" block color="warning" class = "push">Rate</v-btn>
-                        </template>  
-                        <!--Update Modal-->
-          
-                        
-                        <v-layout column>
-                                <v-card >
-                                  <v-flex text-center mt-4>
-                                      <v-card-text class = "  display-1 font-weight-light">Rate</v-card-text>
-                                  </v-flex>
-                                
-                                      <v-flex mx-5>
-          
-                                      <v-card-text>
-                                          <form class = " mt-3 navbar-form navbar-right" enctype="multipart/form-data"  method = "POST" action = "post/{{ad.id}}/rate/">
-                                              {% csrf_token %}
-                                              
-                                              <v-layout column>
-                                             
+                  </v-card-title>
+                 
     
-                                              
-                                              <v-flex mt-3>
-                                                  <v-text-field
-                                                  type="number" 
-                                                  name="rating" 
-                                                  id="id_rating"
-                                                  :counter="20"
-                                                 large
-                                                 hint = "{{ field.help_text }}"
-                                                         persistent-hint
-                                                  max = 10
-                                                  min = 0
-                                                ></v-text-field>
-                                                
-                                              </v-flex>
-                                              
-                                 
-    
-                                         </v-flex>
-                                        
-          
-          
-                                          <v-btn 
-                                          type = "submit"
-                                          class="mx-0 mt-2 mb-3"  
-                                          large
-                                          dark
-                                          color = "warning nodecor"
-          
-                                        >
-                                      Rate
-                                     </v-btn>
-                                        </v-flex>
-                                      </v-card-text>
-                                      </v-card>
-                                    </v-layout>
-          
-                                      <!--/Rating Modal-->
-          
-          
-                                        
-          
-          
-          
-          
-          
-                                          </v-layout>
-                                      </form>
-                                      
-                                    </v-card-text>
-          
-                                      </v-flex>
-                                      </v-card>
-                                  
-                                </v-dialog>
-
-
-
-
-                                {%else %}
-
-                                {%endif%}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        </div>
-                      </v-card>
-                      <v-card>
-                          <v-btn href = "/user/{{ad.author.id}}" class ="nodecor" block color="info">View Profile</v-btn>
-                        </v-card> 
-                        
-               </v-flex>
-              </v-layout>
-              
-              </v-flex>
-             
-        </v-card>
+                </div>
+                <v-flex   class = "buttonstation" >
         
-        
-</v-flex>
+                    <v-btn  block color="blue" dark>Block Button</v-btn>
+                </v-flex>
+                
+            </div>
+            
+        <br>                
+
+       
 {% endfor %}            
 
                    
