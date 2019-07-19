@@ -23,7 +23,7 @@ img {
 
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 652px) {
   .titleside {
     position:relative'
     left:20%;
@@ -43,6 +43,11 @@ img {
       left:20px;
       bottom:20px;
 
+  }
+  .imagertwo{
+    position:relative;
+    left:20px;
+    bottom:25px;
   }
   
   .con1 {
@@ -75,7 +80,7 @@ img {
 }
 
 .textbox { 
-  max-width: 200px;  
+  max-width: 190px;  
   overflow: hidden;
   white-space: nowrap; 
   text-overflow: ellipsis;
@@ -95,9 +100,9 @@ img {
 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 652px) {
   .titleside {
-    position:relative'
+    position:relative;
     left:20%;
   }
   .card{
@@ -105,15 +110,25 @@ img {
       height:250px;
       position:relative;
       top:50px;
-      
+      right:5%;
 
 
   }
-  
+  .searchbox{
+   
+    position:relative;
+    top:50px;
+  }
   .imager{
     position:relative;
     left:50px;
     
+}
+.imagertwo{
+
+  position:relative;
+    left:50px;
+    bottom:18px;
 }
 .con1 {
     position: relative;
@@ -159,17 +174,27 @@ text-overflow: ellipsis;
 
 
 
+
+
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 760px) {
-  
+@media only screen and (min-width: 768px) {
+  .repositioning{
+    right:10%;
+
+  }
   .card{
       width:560px;
       height:250px;
       position:relative;
       top:50px;
-      left:13%;
+      left:10%;
 
+  }
 
+  .searchbox{
+    position:relative;
+    top:50px;
+    left:0px;
   }
   .titleside {
     position:relative'
@@ -179,6 +204,12 @@ text-overflow: ellipsis;
     position:relative;
     left:50px;
     
+}
+
+.imagertwo{
+  position:relative;
+  left:50px;
+  bottom:15px;
 }
 .con1 {
     position: relative;
@@ -224,6 +255,10 @@ text-overflow: ellipsis;
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 850px) {
 
+  .repositioning{
+    right:0px;
+
+  }
   .card{
       width:600px;
       height:250px;
@@ -234,6 +269,16 @@ text-overflow: ellipsis;
 
   }
   
+  
+  
+  .searchbox{
+    position:relative;
+      top:50px;
+
+    max-width:650px;
+    left:20%;
+     }
+  
   .anomalySwitch{
     left:20% !important;
 
@@ -242,6 +287,12 @@ text-overflow: ellipsis;
     position:relative;
     left:50px;
     
+}
+
+.imagertwo{
+  position:relative;
+  left:50px;
+bottom:15px;
 }
 .con1 {
     position: relative;
@@ -285,20 +336,39 @@ text-overflow: ellipsis;
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .repositioning{
+    right:0px;
+
+  }
   .card{
       width:600px;
       height:250px;
       position:relative;
       top:50px;
       left:29%;
-       purple 2px;
+    
 
   }
+
+  
+  .searchbox{
+    position:relative;
+      top:50px;
+    max-width:650px;
+    left:25%;
+
+     }
   
   .imager{
     position:relative;
     left:50px;
     
+}
+
+.imagertwo{
+  position:relative;
+  left:50px;
+bottom:15px;
 }
 .con1 {
     position: relative;
@@ -342,6 +412,10 @@ text-overflow: ellipsis;
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 
+  .repositioning{
+    right:0px;
+
+  }
   .card{
   
       width:800px;
@@ -352,11 +426,26 @@ text-overflow: ellipsis;
        
 
   }
+
+
+   
+  .searchbox{
+    position:relative;
+      top:50px;
+    max-width:900px;
+    left:23%;
+  }
   
   .imager{
       position:relative;
       left:50px;
       
+  }
+
+  .imagertwo{
+    position:relative;
+    left:50px;
+    bottom:18px;
   }
   .con1 {
       position: relative;
@@ -737,6 +826,7 @@ margin-top: 5px;
     width: 100%;
     height: auto;
     position: relative;
+    bottom:50px;
   }
   .sidebar a {float: left;}
   div.content {margin-left: 0;}
@@ -760,7 +850,6 @@ margin-top: 5px;
     text-align: center;
     float: none;
   }
-
 
 
   .sidebar .sidequeries small{

@@ -70,10 +70,10 @@
       
   </div>
 
-      <v-container   grid-list-clas  >
-          <v-flex mt-5 xs12 offset-sm3  offset-md3 offset-lg2 sm-6 md-6 lg-10  app  >
+      <v-container    grid-list-clas  >
+          <v-flex  class = "searchbox" >
 
-          <v-card light color="white" md-5 fluid>
+          <v-card   light color="white" >
           <v-card-title class = "display-1 font-weight-light " >
             Search for a Subject/Unit
           </v-card-title>
@@ -135,6 +135,7 @@
   {%endif%}
           </v-card-title>
           <v-divider class ="divider"></v-divider>
+          {% if user.profile.tutor %}
           <div class ="imager">
             <v-avatar
             tile
@@ -144,6 +145,17 @@
           <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
         </v-avatar>
         </div>
+        {%else%}
+        <div class ="imagertwo">
+          <v-avatar
+          tile
+        size="130"
+        color="grey lighten-4"
+      >
+        <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
+      </v-avatar>
+      </div>
+        {%endif%}
             <div class="con1">
                 <v-card-title primary-title>
                     <div class = "innercontainer">
@@ -151,15 +163,105 @@
                       <div class = "units">Teaches : {{ad.subject.capitalize}} - {{ad.unit.capitalize}}</div>
                       <div>Contact : {{ad.author.profile.phone}}</div>
                       <div>Price   : {{ad.price}}$/hr</div>
-                      <div  ><v-btn  class="ma-0 button2" block small dark color = " amber darken-2">Hey</v-btn></div>
+                   <div>
+                    {% if user.profile.tutor %}
+                    <v-dialog v-model="dialog" max-width="600px" >
+                      <template v-slot:activator="{ on }">
+                        <v-btn   dark v-on="on" block small color="warning" class="ma-0 button2">Rate</v-btn>
+                      </template>  
+                      <!--Update Modal-->
+        
+                      
+                      <v-layout column>
+                              <v-card >
+                                <v-flex text-center mt-4>
+                                    <v-card-text class = "  display-1 font-weight-light">Rate</v-card-text>
+                                </v-flex>
+                              
+                                    <v-flex mx-5>
+        
+                                    <v-card-text>
+                                        <form class = " mt-3 navbar-form navbar-right" enctype="multipart/form-data"  method = "POST" action = "post/{{ad.id}}/rate/">
+                                            {% csrf_token %}
+                                            
+                                            <v-layout column>
+                                           
+      
+                                            
+                                            <v-flex mt-3>
+                                                <v-text-field
+                                                type="number" 
+                                                name="rating" 
+                                                id="id_rating"
+                                                :counter="20"
+                                               large
+                                               hint = "{{ field.help_text }}"
+                                                       persistent-hint
+                                                max = 10
+                                                min = 0
+                                              ></v-text-field>
+                                              
+                                            </v-flex>
+                                            
+                               
+      
+                                       </v-flex>
+                                      
+        
+        
+                                        <v-btn 
+                                        type = "submit"
+                                        class="mx-0 mt-2 mb-3"  
+                                        large
+                                        dark
+                                        color = "warning nodecor"
+        
+                                      >
+                                    Rate
+                                   </v-btn>
+                                      </v-flex>
+                                    </v-card-text>
+                                    </v-card>
+                                  </v-layout>
+        
+                                    <!--/Rating Modal-->
+        
+        
+                                      
+        
+        
+        
+        
+        
+                                        </v-layout>
+                                    </form>
+                                    
+                                  </v-card-text>
+        
+                                    </v-flex>
+                                    </v-card>
+                                
+                              </v-dialog>
+      
+      
+      
+                              {%else %}
+
+                              {%endif%}
+      
+      
+
+
+
+                   </div>
                     </div>
                   </v-card-title>
                  
     
                 </div>
                 <v-flex   class = "buttonstation" >
-        
-                    <v-btn  block color="blue" dark>Block Button</v-btn>
+                  <v-btn href = "/user/{{ad.author.id}}" class ="nodecor"block color="info" dark>View Profile</v-btn>
+
                 </v-flex>
                 
             </div>
