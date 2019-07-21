@@ -7,6 +7,7 @@ class Profile(models.Model):
     tutor = models.BooleanField(default=False)
     pic = models.ImageField(upload_to = 'profile_pic', default = 'download.png')
     phone = models.CharField(max_length=30, default = "0404040404")
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.username} Profile'

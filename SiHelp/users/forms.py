@@ -11,8 +11,11 @@ class UserRegisterForm(UserCreationForm):
     
     def clean_email(self):
         data = self.cleaned_data['email']
+        username = self.cleaned_data['username']
         if "@student.uwa.edu.au" not in data:   # any check you need
             raise forms.ValidationError("Must be a UWA address")
+        if data and User.objects.filter(email=data).exclude(username=username).exists():
+            raise forms.ValidationError(u'There is already an account using this email address')
         return data
     class Meta:
         model = User

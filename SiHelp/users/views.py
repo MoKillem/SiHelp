@@ -11,6 +11,16 @@ from blog.views import PostDeleteView
 from django.template.defaulttags import register
 from django.db.models import Func
 import logging
+from django.conf import settings
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import EmailMultiAlternatives
+from django.contrib.auth.tokens import default_token_generator
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+from django.urls import reverse
+from users.models import Profile
+from django.contrib.auth.models import User 
 
 logger = logging.getLogger(__name__)
 
@@ -52,17 +62,55 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
+            save_it = form.save(commit=False)
+            save_it.save()
             username = form.cleaned_data.get('username')
             messages.success(request, "You are now logged in " + username)
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password1'])
             login(request, user)
+
+            text_content = 'Account Activation Email'
+            subject = 'Email Activation'
+            template_name = "users/activation.html"
+            from_email = settings.EMAIL_HOST_USER
+            recipients = [user.email]
+            kwargs = {
+                "uidb64": user.pk,
+                "token": default_token_generator.make_token(user)
+            }
+            activation_url = reverse("activate_user_account", kwargs=kwargs)
+
+            activate_url = "{0}://{1}{2}".format(request.scheme, request.get_host(), activation_url)
+
+            context = {
+                'user': user,
+                'activate_url': activate_url
+            }
+            html_content = render_to_string(template_name, context)
+            email = EmailMultiAlternatives(subject, text_content, from_email, recipients)
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
             return redirect('createprofile')
         else:
             print(form.errors)
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
+
+def activate_user_account(request, uidb64=None, token=None):
+    try:
+        uid = uidb64
+        user = User.objects.get(pk=uid)
+    except user.DoesNotExist:
+        user = None
+    if user and default_token_generator.check_token(user, token):
+        user.profile.is_active = True
+        user.save()
+        login(request, user)
+        return redirect('user-profile')
+    else:
+        return HttpResponse("Activation link has expired")
 
 @login_required
 def createprofile(request):

@@ -108,6 +108,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         if Ad.objects.filter(author=self.request.user).count() >= 3:
             messages.error(self.request, 'You can only post 3 ads at maximum!')
             return redirect('/')
+        if Profile.objects.filter(user=self.request.user).first().is_active == False:
+            messages.error(self.request, 'Please activate your account by verifying your email address first')
+            return redirect('/')
         return super().form_valid(form)
 
 
@@ -154,7 +157,8 @@ def add_comment_to_post(request, pk):
             rate.save(update_fields=["rating"]) 
             return redirect('/') #flash some message here
         elif request.user.profile.tutor == True:
-            return redirect('blog-Entry')
+            messages.error(self.request, 'Tutors are not allowed to rate ads')
+            return redirect('/')
     else:
         form = CommentForm()
     return redirect('/')
