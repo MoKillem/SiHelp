@@ -12,6 +12,7 @@ from users.models import Profile
 from django.template.defaulttags import register
 import logging
 from django.urls import reverse, reverse_lazy
+from django.contrib import messages
 import pickle
 import uuid 
 # from django.http import HttpResponse
@@ -97,12 +98,16 @@ class UserDetailView(ListView):
 
     
 class PostCreateView(LoginRequiredMixin, CreateView):
+
     model = Ad
     fields = ['title','subject', 'unit', 'description','price']
     success_url = '/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        if Ad.objects.filter(author=self.request.user).count() >= 3:
+            messages.error(self.request, 'You can only post 3 ads at maximum!')
+            return redirect('/')
         return super().form_valid(form)
 
 
