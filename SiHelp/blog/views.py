@@ -51,11 +51,11 @@ class Round(Func):
     function = 'ROUND'
     template='%(function)s(%(expressions)s, 0)'
 
-def home(request):
+def homeroute(request):
     context = {
-        'ads': Ad.objects.all()
+        'user' : request.user
     }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/Landingpage.html', context)
 
 class PostListView(ListView):
     model = Ad

@@ -516,6 +516,7 @@ input[type='checkbox']:checked {
 }
 .app{
   display:none;
+  background-color: grey;
  
 }
 
