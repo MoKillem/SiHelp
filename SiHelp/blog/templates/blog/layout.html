@@ -1,30 +1,27 @@
 
 
 <html>
-  
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <head>
+        {% load static %}    
+        <link rel="stylesheet" href="{% static 'blog/Entry.css' %}">
+        {% load static %}    
+        <link rel="icon" 
+         type="image/png" 
+         href="{% static 'blog/Sihelplogo.png' %}">
+   <title>SiHelp</title>
 
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-     {% load static %}    
-     <link rel="stylesheet" href="{% static 'blog/Entry.css' %}">
-     {% load static %}    
-     <link rel="icon" 
-      type="image/png" 
-      href="{% static 'blog/Sihelplogo.png' %}">
-    <title>SiHelp</title>
-      
+   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.5.16/vuetify.css" rel="stylesheet">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.5.16/vuetify.css.map" rel="stylesheet">
+
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+   </head>
 <body>
-    <div class ="preload">
-     <h1> Please Wait...</h1>
-      {% load static %}  
-      <v-img src="{% static 'blog/loader.gif' %}"
-                      ></v-img >  
-    </div>
-    <div class ="app" id="app">
-        <v-app>
+    
+    <div id="app">
+
+        <v-app light>
         {% block modal %}
         {% endblock %}
 
@@ -206,7 +203,6 @@
         <v-content>
         <!--Content-->
         {% block content %}
-        
             
             
               {% if form.errors %}
@@ -235,53 +231,21 @@
         <!--/Content-->
         </v-content>
         
-        <v-footer
-       absolute
-        class = "pt-3"
-        class="blue lighten-3 "
       
-       
-      >
-        <v-card
-          class="flex"
-          flat
-          tile
-        >
-          
-        
-    
-          <v-card-actions class="blue lighten-3 justify-center text-white">
-            2019 — <strong>SiHelp</strong>
-          </v-card-actions>
-        </v-card>
-      </v-footer>
             </v-app>
 
-            </div>
+  
+</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.5.16/vuetify.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.5.16/vuetify.js.map"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
-  <script
-			  src="https://code.jquery.com/jquery-3.4.1.js"
-			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-        crossorigin="anonymous"></script>
-        <script src= "{% static 'blog/TutorialPage.js' %}"></script>
-        <script>
-            $(function(){
-            
-              $(".preload").fadeOut(2000,function(){
-                $(".app").fadeIn(1000);
-            
-              })
-            })
-            
-            </script>
-		
   <script>
-    new Vue({ el: '#app' })
+      new Vue({
+      el: '#app',
+     
+    })
   </script>
 {% load static %}    
 

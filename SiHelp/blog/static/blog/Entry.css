@@ -514,11 +514,7 @@ input[type='checkbox']:checked {
   position:relative;
   top: 13px;
 }
-.app{
-  display:none;
-  background-color: grey;
- 
-}
+
 
 .preload{
   margin:0;
