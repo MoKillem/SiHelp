@@ -50,7 +50,7 @@
 </v-card-title>
 </form>
     {% if  user.is_authenticated %}
-    {% if user.profile.tutor %}
+    {% if user.profile.tutor and user.profile.is_active %}
 
 <v-divider></v-divider>
 
@@ -79,10 +79,10 @@
 
       <v-container    grid-list-clas  >
           <v-flex   >
-
           <v-card   class = "searchbox" light color="white" >
           <v-card-title class = "display-1 font-weight-light " >
             Search for a Subject/Unit
+
           </v-card-title>
 
           <v-card-text text-center>
@@ -142,7 +142,7 @@
   {%endif%}
           </v-card-title>
           <v-divider class ="divider"></v-divider>
-          {% if user.profile.tutor %}
+          {% if user.profile.tutor and user.profile.is_active %}
           <div class ="imager">
             <v-avatar
             tile
@@ -177,8 +177,6 @@
                         <v-btn   dark v-on="on" block small color="warning" class="ma-0 button2">Rate</v-btn>
                       </template>  
                       <!--Update Modal-->
-        
-                      
                       <v-layout column>
                               <v-card >
                                 <v-flex text-center mt-4>
