@@ -1,9 +1,0 @@
-{% extends "blog/base.html" %}
-{% block content %}
-    {% for ad in ads %}
-        <a href="{% url 'ad-detail' ad.id %}">{{ ad.subject }} </h1></a>
-        <p>By {{ ad.author }} on {{ ad.date }}</p>
-        <p>{{ ad.unit }}</p>
-    {% endfor %}
-  
-{% endblock content %}

@@ -18,8 +18,13 @@
                           <v-flex xs5 offset-xs1  grow  class = "photovue">   
                             
                                               {% load static %}    
-                          <v-img src="{{ mockuser.profile.pic.url }}"
-                          contain ></v-img >
+                          <v-avatar
+            tile
+          size="250"
+          color="grey lighten-4"
+        >
+          <img src="{{ mockuser.profile.pic.url }}" alt="avatar">
+        </v-avatar>
                         
                        </v-flex>
         
@@ -125,8 +130,13 @@
               <v-flex xs5 offset-xs1  grow  class = "photovue">   
                 
                                   {% load static %}  
-                  <v-img src="{{ ad.author.profile.pic.url }}"
-                                  contain ></v-img >  
+                                  <v-avatar
+                                  tile
+                                size="250"
+                                color="grey lighten-4"
+                              >
+                                <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
+                              </v-avatar>
              
                                  
            </v-flex>
@@ -193,6 +203,7 @@
 
 
                         {% if mockuser.profile.tutor %}
+                        {% if user.profile.tutor and user.profile.is_active %}
 
                         <v-dialog v-model="dialog" max-width="600px" >
                             <template v-slot:activator="{ on }">
@@ -256,6 +267,9 @@
                                           <!--/Rating Modal-->
               
               
+                                          {% else %}
+                                          {%endif%}
+    
                                           {% else %}
                                           {%endif%}
     

@@ -130,7 +130,10 @@
                               >
                               Need to register?
                            </v-btn>
+
                               </v-flex>
+
+                            
                             </v-card-text>
                             </v-card>
                           </v-layout>
@@ -178,6 +181,7 @@
                               <v-list-tile>
                                   <v-btn flat class ="nodecor" href="/profile">Account</v-btn>
                                 </v-list-tile>
+                                
                             
                         </v-list>
                       </v-menu>
@@ -186,6 +190,10 @@
                     <v-btn flat class ="nodecor" style = "font-size:15px;" href="/logout"><span>Logout</span>
                     <v-icon right >exit_to_app</v-icon>
                     </v-btn>
+                    {%if not user.profile.is_active%}
+                    <v-btn color=  "red" class ="nodecor" style = "font-size:15px;"><span class = "title bold">Not Activated!</span>
+                      {%else%}
+                      {%endif%}
                    
                    
                    
@@ -203,9 +211,16 @@
 
         <v-content>
         <!--Content-->
+        {%if not user.profile.is_active and  user.is_authenticated%}
+        <v-card>
+          <v-card-text class ="text-center ">
+        <v-btn color=  "red" class ="nodecor" style = "font-size:15px;"><span class = "title text-white bold">Activate account</span>
+        </v-card-text>
+        </v-card>
+          {%else%}
+          {%endif%}
         {% block content %}
-            
-            
+        
               {% if form.errors %}
               
               <div class="alert alert-danger">

@@ -21,9 +21,13 @@
                   <v-flex xs5 offset-xs1  grow  class = "photovue">   
                     
                                       {% load static %}    
-                  <v-img src="{{ user.profile.pic.url }}"
-                  contain ></v-img >
-                
+                                      <v-avatar
+                                      tile
+                                    size="250"
+                                    color="grey lighten-4"
+                                  >
+                                    <img src="{{ user.profile.pic.url }}" alt="avatar">
+                                  </v-avatar>
                </v-flex>
 
                <v-flex xs6   pb-5 class = "  font-weight-light subheading centerInfo" grow wrap>
@@ -306,9 +310,13 @@
                    <v-flex xs5 offset-xs1  grow  class = "photovue">   
                      
                                        {% load static %}  
-                       <v-img src="{{ ad.author.profile.pic.url }}"
-                                       contain ></v-img >  
-                  
+                                       <v-avatar
+                                       tile
+                                     size="250"
+                                     color="grey lighten-4"
+                                   >
+                                     <img src="{{ mockuser.profile.pic.url }}" alt="avatar">
+                                   </v-avatar>
                                       
                 </v-flex>
                

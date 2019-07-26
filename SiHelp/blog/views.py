@@ -108,6 +108,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         if Ad.objects.filter(author=self.request.user).count() >= 3:
             messages.error(self.request, 'You can only post 3 ads at maximum!')
             return redirect('/')
+        if not user.profile.tutor and not user.profile.is_active:
+            messages.error(self.request, 'You are not an activated tutor')
+            return redirect('/')
         if Profile.objects.filter(user=self.request.user).first().is_active == False:
             messages.error(self.request, 'Please activate your account by verifying your email address first')
             return redirect('/')
@@ -145,7 +148,7 @@ def add_comment_to_post(request, pk):
     if request.method == "POST":
         form = CommentForm(request.POST)
         exist = Rate.objects.filter(user_id=request.user, ad_id=ad)
-        if form.is_valid() and len(exist) == 0 and request.user.profile.tutor == False:
+        if form.is_valid() and len(exist) == 0 and request.user.profile.tutor == False and request.user.profile.is_active == True:
             rate = form.save(commit=False)
             rate.ad_id = ad
             rate.user_id = request.user
@@ -163,9 +166,6 @@ def add_comment_to_post(request, pk):
         form = CommentForm()
     return redirect('/')
 
-def about(request):
-  
-    return render(request, 'blog/about.html', {'title':'About'})
 
 def marketplace(request):
     user = request.user
@@ -213,30 +213,3 @@ def marketplace(request):
     }
     return render(request, 'blog/TutorialPage.html', context)
 
-def layout(request):
-    context = {
-        'loggedin': False
-    }
-    return render(request, 'blog/layout.html', context)
-
-def SignUpTutor(request):
-   
-    return render(request, 'blog/SignUpPageLogin.html')
-
-def SignUpNt(request):
-    
-    return render(request, 'blog/Nontutorsignup.html')
-
-
-@login_required
-def Account(request):
-    return render(request, 'blog/Account.html',{'range': range(10)})
-    
-def Entry(request):
-   
-    return render(request, 'blog/EntryPage.html')
-
-def ProfilePage(request):
-   
-    return render(request, 'blog/ProfilePage.html',{'range': range(10)})
-  
