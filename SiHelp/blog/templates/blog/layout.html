@@ -32,13 +32,16 @@
 
 
             <!--NavBar-->
-            <v-toolbar dark color="primary" height= "90px" app>
-                  <v-toolbar-title>
-            <a class="navbarTitle text-white  " href="/"><strong style = "font-size:55px;" >  {% load static %}
+            <v-toolbar dark color = "blue">
+                <v-toolbar-side-icon class = "white--text" @click = "drawer = !drawer"></v-toolbar-side-icon>
+
+                <v-toolbar-title>
+                  
+            <a  href="/"> {% load static %}
 {% load static %}
-                <img src="{% static 'blog/Sihelplogo.png' %}" height="200">
+                <img src="{% static 'blog/Sihelplogo.png' %}" height="140">
               
-              </strong></a></v-toolbar-title>
+             </a></v-toolbar-title>
         <v-spacer></v-spacer>
       
                 {% if not user.is_authenticated %}
@@ -47,14 +50,15 @@
                                       
                 <v-toolbar-items >
 <!--Register-->
-
-<v-btn flat class ="nodecor" style = "font-size:15px;" href="/register"><span>Register</span>
+<v-btn flat text href="/register" class ="nodecor">Register
   <v-icon right >group_add</v-icon>
+</v-btn>
+
   </v-btn>
                       <!--/Register-->
 
                     <v-menu offset-y>
-                        <v-btn class ="pr-5"  flat slot="activator" style = "font-size:15px;">
+                        <v-btn class ="pr-5"  flat slot="activator">
                           <v-icon left>expand_more</v-icon>
                           
                           <span >Menu</span>
@@ -72,7 +76,7 @@
                     <!--Login Modal-->
                     <v-dialog v-model="dialog" max-width="600px" >
                       <template v-slot:activator="{ on }">
-                        <v-btn flat class ="nodecor " dark v-on="on" style = "font-size:15px;">Login
+                        <v-btn flat class ="nodecor " dark v-on="on">Login
                         <v-icon right >exit_to_app</v-icon></v-btn>
                       </template>
                   <v-layout column>
@@ -166,7 +170,7 @@
                 <v-toolbar-items >
                     
                     <v-menu  offset-y >
-                        <v-btn class ="pr-5" flat slot="activator" style = "font-size:15px;">
+                        <v-btn class ="pr-5" flat slot="activator" >
                           <v-icon left>expand_more</v-icon>
                           <span>Menu</span>
                         </v-btn>
@@ -187,11 +191,11 @@
                       </v-menu>
 
                       
-                    <v-btn flat class ="nodecor" style = "font-size:15px;" href="/logout"><span>Logout</span>
+                    <v-btn flat class ="nodecor" text href="/logout"><span>Logout</span>
                     <v-icon right >exit_to_app</v-icon>
                     </v-btn>
                     {%if not user.profile.is_active%}
-                    <v-btn color=  "red" class ="nodecor" style = "font-size:15px;"><span class = "title bold">Not Activated!</span>
+                    <v-btn color=  "red" class ="nodecor" text><span class = "title bold">Not Activated!</span>
                       {%else%}
                       {%endif%}
                    
@@ -211,15 +215,7 @@
 
         <v-content>
         <!--Content-->
-        {%if not user.profile.is_active and  user.is_authenticated%}
-        <v-card>
-          <v-card-text class ="text-center ">
-        <v-btn color=  "red" class ="nodecor" style = "font-size:15px;"><span class = "title text-white bold">Activate account</span>
-        </v-card-text>
-        </v-card>
-          {%else%}
-          {%endif%}
-        {% block content %}
+                {% block content %}
         
               {% if form.errors %}
               
@@ -247,7 +243,22 @@
         <!--/Content-->
         </v-content>
         
+        <v-card height="20" dark mt-5 pt-5>
+            <v-footer
+            color = "blue lighten--2"
+              absolute
+              class="font-weight-medium"
+            >
+              <v-flex
+                text-center
+                xs12
+              >
+               2019  — <strong>Vuetify</strong>
+              </v-flex>
+            </v-footer>
+          </v-card>
       
+
             </v-app>
 
   
@@ -270,6 +281,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   new Vue({
     el: "#app",
+    data(){
+      return{
+        drawer:false
+      }
+    },
     mounted() {
       $.holdReady(false)
     }

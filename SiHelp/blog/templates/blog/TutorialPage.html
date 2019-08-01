@@ -17,277 +17,302 @@
     {% endfor %}
 </card>
 {% endif %}
-            <!--Right side Bar-->
-  
+<!-- right bar-->
+<v-navigation-drawer temporary :width = "200" app class = "white  " sticky  v-model = "drawer" >
+                  <v-layout column justify-space-between>
+                  <v-flex ml-1 >
+                    <v-card-text  class = " title  .font-weight-thin">
+                     <div class = "coloredblue"> View Top Posts</div>
+                    </v-card-text>
+                    </v-flex>
+                    <v-divider ></v-divider>
+                    <form type="get" action="." >
+                        {% csrf_token %}
 
-    <div class="sidebar pt-5 ">
-        <v-card>
+                    <v-flex text-center  > 
+                     
 
-      <hr>
+                        <v-btn
+                        text
+                        block 
+                        type = "submit"
+                        name = "highestrated"
+                        flat
+                        color="blue lighten--2 accent-4"
+                      >
+                        Most liked
+                    </v-flex>
+                    </form>
+                    <form type="get" action="." >
+                        {% csrf_token %}
 
-    <v-card-text class =" headline font-weight-thin text-center"> View Top Posts </v-card-text>
+                    <v-flex text-center> 
+                      
+                        <v-btn
+                        text
+                        block
+                        type = "submit" 
+                        name = "mostaffordable"
+                        
+                        flat
+                        color="blue lighten--2 accent-4"
+                      >
+                        Most Affordable
+                    </v-flex>
+                    </form>
+                    <form type="get" action="." >
+                        {% csrf_token %}
 
-    <v-divider></v-divider>
-     <!-- Button trigger modal -->
-
-      <div class ="text-center">
-    <form type="get" action="." >
-        <v-card-title>
-        {% csrf_token %}
-    <v-btn block type = "submit" name = highestrated flat color="indigo lighten-3" dark>Highest Rated</v-btn>
-  </v-card-title>
-    </form>
-    <form type="get" action="." >
-      <v-card-title>
-      {% csrf_token %}
-  <v-btn block type = "submit" name = mostaffordable flat color="indigo lighten-3" dark>Affordable</v-btn>
-</v-card-title>
-  </form>
-  <form type="get" action="." >
-    <v-card-title>
-    {% csrf_token %}
-<v-btn block type = "submit" name = controversial flat color="indigo lighten-3" dark>Most Controversial</v-btn>
-</v-card-title>
-</form>
-    {% if  user.is_authenticated %}
-    {% if user.profile.tutor and user.profile.is_active %}
-
-<v-divider></v-divider>
-
-    <form action = "/post/new/">
-      <v-btn block type="submit" flat color="indigo lighten-3" dark>Create an Ad</v-btn>
-
-    </form>
-    {%else%}
-    {%endif%}
-      {% endif %}
-
-  </v-card>
-  </div>
-    <hr>
-
-
-
-
-
-
-
-
-
-      
-  </div>
-
-      <v-container    grid-list-clas  >
-          <v-flex   >
-          <v-card   class = "searchbox" light color="white" >
-          <v-card-title class = "display-1 font-weight-light " >
-            Search for a Subject/Unit
-
-          </v-card-title>
-
-          <v-card-text text-center>
-          <form type="get" action=".">
-            <v-flex xs-12>
-          <v-text-field
-          class="mt-3"
-          flat
-          name="search_box"  
-          label="Search"
-          prepend-inner-icon="search"
-          solo-inverted
-        >  </v-text-field>
-            </v-flex>
-  
-            <v-flex >
-              <span>  <v-btn  type = "submit" color  = "warning"   name = search
-                >Search</v-btn>
-                <v-btn color="primary" name = "refresh" dark type = "submit" name = "refresh">
-                    <v-icon  dark >refresh</v-icon>
-               </v-btn> 
-              </v-flex>
-
-                    
-
-  
-      </form>
-    
-    </v-card-text>
-    </v-card>
-   </v-container>    
-  </v-flex>
-
-        <v-container   >
-
-          {% if ads|length > 0 %}
-       {% for ad in ads %}
-       <div class="card">
-          <v-card-title class = "display-1 font-weight-thin text-centered "> <span class = "textbox">{{ad.title}}</span> 
-  <v-spacer></v-spacer>
-  {% if ad.average_rating %}
-  {% for n in ad.average_rating|rounding|get_range %}
-  <span><v-icon color="amber darken-2"  class = "starry" >star</v-icon></span>
-  {%endfor%}
-  {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
-  
-  <span><v-icon color="gray darken-2  " class = "starry">star</v-icon></span>
-
-  {%endfor%}
-
-  {%else%}
-  {%for i in 10|get_range %}
-  
-  <span><v-icon  color="gray darken-2" class = "starry" >star</v-icon></span>
-
-  {%endfor%}
-  {%endif%}
-          </v-card-title>
-          <v-divider class ="divider"></v-divider>
-          {% if user.profile.tutor and user.profile.is_active %}
-          <div class ="imager">
-            <v-avatar
-            tile
-          size="130"
-          color="grey lighten-4"
-        >
-          <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
-        </v-avatar>
-        </div>
-        {%else%}
-        <div class ="imagertwo">
-          <v-avatar
-          tile
-        size="130"
-        color="grey lighten-4"
-      >
-        <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
-      </v-avatar>
-      </div>
-        {%endif%}
-            <div class="con1">
-                <v-card-title primary-title>
-                    <div class = "innercontainer">
-                      <div class="headline">Mohamed Yusuf</div>
-                      <div class = "units">Teaches : {{ad.subject.capitalize}} - {{ad.unit.capitalize}}</div>
-                      <div>Contact : {{ad.author.profile.phone}}</div>
-                      <div>Price   : {{ad.price}}$/hr</div>
-                   <div>
+                    <v-flex text-center > 
+                        <v-btn
+                        text
+                        block type = "submit" 
+                        name = controversial
+                        flat
+                        color="blue lighten--2 accent-4"
+                      >
+                       Most Controversial
+                    </v-flex>
+                    </form>
+                    {% if  user.is_authenticated %}
                     {% if user.profile.tutor and user.profile.is_active %}
+                    <v-divider></v-divider>
+                    <form  action="/post/new/">
+                        {% csrf_token %}
 
-                    <v-dialog v-model="dialog" max-width="600px" >
-                      <template v-slot:activator="{ on }">
-                        <v-btn   dark v-on="on" block small color="warning" class="ma-0 button2">Rate</v-btn>
-                      </template>  
-                      <!--Update Modal-->
-                      <v-layout column>
-                              <v-card >
-                                <v-flex text-center mt-4>
-                                    <v-card-text class = "  display-1 font-weight-light">Rate</v-card-text>
-                                </v-flex>
-                              
-                                    <v-flex mx-5>
-        
-                                    <v-card-text>
-                                        <form class = " mt-3 navbar-form navbar-right" enctype="multipart/form-data"  method = "POST" action = "post/{{ad.id}}/rate/">
-                                            {% csrf_token %}
-                                            
-                                            <v-layout column>
-                                           
-      
-                                            
-                                            <v-flex mt-3>
-                                                <v-text-field
-                                                type="number" 
-                                                name="rating" 
-                                                id="id_rating"
-                                                :counter="20"
-                                               large
-                                               hint = "{{ field.help_text }}"
-                                                       persistent-hint
-                                                max = 10
-                                                min = 0
-                                              ></v-text-field>
-                                              
-                                            </v-flex>
-                                            
-                               
-      
-                                       </v-flex>
-                                      
-        
-        
-                                        <v-btn 
-                                        type = "submit"
-                                        class="mx-0 mt-2 mb-3"  
-                                        large
-                                        dark
-                                        color = "warning nodecor"
-        
-                                      >
-                                    Rate
-                                   </v-btn>
-                                      </v-flex>
-                                    </v-card-text>
-                                    </v-card>
-                                  </v-layout>
-        
-                                    <!--/Rating Modal-->
-        
-        
-                                      
-        
-        
-        
-        
-        
-                                        </v-layout>
-                                    </form>
-                                    
-                                  </v-card-text>
-        
-                                    </v-flex>
-                                    </v-card>
-                                
-                              </v-dialog>
-      
-      
-      
-                              {%else %}
+                    <v-flex text-center> 
+                        <v-btn
+                        text
+                        block
+                         type="submit"
+                        flat
+                        color="blue lighten--2 accent-4"
+                      >
+                        Create Ad
+                    </v-flex>
+                    </form>
+                    {%else%}
+                {%endif%}
+                  {% endif %}
+                  </v-layout>
+                </v-navigation-drawer>
 
-                              {%endif%}
-      
-      
+                <!--/right side bar-->
+                <!--Search Barr-->
+                <v-layout column justify-space-around >
+                    <v-container >
+          
+                  <v-flex xs12 ma-0  pa-0   >
+          
+                          <v-card
+                          class="pa-3"
+                          
+                          class="rounded-card"
+                        >
+                        <form type="get" action=".">
 
-
-
-                   </div>
-                    </div>
-                  </v-card-title>
-                 
-    
-                </div>
-                <v-flex   class = "buttonstation" >
-                  <v-btn href = "/user/{{ad.author.id}}" class ="nodecor"block color="info" dark>View Profile</v-btn>
-
-                </v-flex>
-                
-            </div>
+                      <v-text-field
+                      dense
+                      floating
+                      class = "mt-3 mx-2"
+                      name="search_box"  
+                     label="Search"
+                  hide-details
+                  single-line
+                  placeholder = "Search for subject or unit"
+                ></v-text-field>
+          
+                <v-btn class = "blue mt-2" type = "submit"  name = search icon>
+                  <v-icon color = "white" >search</v-icon>
+                </v-btn>
+          
+                <v-btn  type = "submit" name = "refresh" class = "blue mt-2" icon>
+                  <v-icon color = "white ">refresh</v-icon>
+                </v-btn>
             
-        <br>                
+              </v-card>
+          
+          
+              </v-flex>
+            </form>
 
-       
-{% endfor %}            
+                    </v-container>
+
+      
+    <!--/Search Bar-->
+                    <!--ads-->
+                    {% if ads|length > 0 %}
+                    <v-container fluid >
+                        <v-flex mt-0>
+                            <v-layout row wrap justify-space-around>
+                        {% for ad in ads %}
+
+                     
+
+                    <v-flex xs10  sm8 md5 mt-3>
+                    <v-card   class=" pb-0 pt-3"
+                                    
+                    class="rounded-card"
+                    >
+                    <v-layout column  justify-space-around>
+                        <v-flex >
+                            <v-card-text class = "font-weight-thin title text-center pt-0 pb-1"> {{ad.title}} </v-card-text>
+                        </v-flex>
+                        <v-flex text-center>
+                            {% if ad.average_rating %}
+                            {% for n in ad.average_rating|rounding|get_range %}
+                            <span><v-icon color="amber darken-2"  class = "starry" >star</v-icon></span>
+                            {%endfor%}
+                            {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
+                            
+                            <span><v-icon color="gray darken-2  " class = "starry">star</v-icon></span>
+                            
+                            {%endfor%}
+                            
+                            {%else%}
+                            {%for i in 10|get_range %}
+                            
+                            <span><v-icon  color="gray darken-2" class = "starry" >star</v-icon></span>
+                            
+                            {%endfor%}
+                            {%endif%}
+                    
+                        </v-flex>
+                        <v-divider class ="mt-0 mb-0"></v-divider>
+                    <v-flex>
+                        <v-layout row justifiy-space-around>
+                            <v-flex xs5 offset-xs1  mt-3 pa-3 offset-md1 >
+                                    <v-avatar
+                                    
+                                    tile
+                                  size="130"
+                                  color="grey lighten-4"
+                                >
+                                  <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
+                                </v-avatar>
+                                
+                            </v-flex>
+                            <v-flex xs8 offset-xs1  mt-3 pa-3 md9>
+                    
+                                    <div class="headline">{{ ad.author.first_name }} {{ ad.author.last_name }}</div>
+                                    <div class = "units">Teaches : {{ad.subject.capitalize}} - {{ad.unit.capitalize}}</div>
+                                    <div>Contact : {{ad.author.profile.phone}}</div>
+                                    <div>Price   : {{ad.price}}$/hr</div>
+                                    <v-flex mr-3>
+                                        {% if user.profile.tutor and user.profile.is_active %}
+
+                                        <v-dialog v-model="dialog" max-width="600px" >
+                                          <template v-slot:activator="{ on }">
+                                    <v-btn dark v-on="on" class = "text-left " block  color = "warning">Rate</v-btn>
+                                 </template>
+
+                                 <v-layout column>
+                                    <v-card >
+                                      <v-flex text-center mt-4>
+                                          <v-card-text class = "  display-1 font-weight-light">Rate</v-card-text>
+                                      </v-flex>
+                                    
+                                          <v-flex mx-5>
+              
+                                          <v-card-text>
+                                              <form class = " mt-3 navbar-form navbar-right" enctype="multipart/form-data"  method = "POST" action = "post/{{ad.id}}/rate/">
+                                                  {% csrf_token %}
+                                                  
+                                                  <v-layout column>
+                                                 
+            
+                                                  
+                                                  <v-flex mt-3>
+                                                      <v-text-field
+                                                      type="number" 
+                                                      name="rating" 
+                                                      id="id_rating"
+                                                      :counter="20"
+                                                     large
+                                                     hint = "{{ field.help_text }}"
+                                                             persistent-hint
+                                                      max = 10
+                                                      min = 0
+                                                    ></v-text-field>
+                                                    
+                                                  </v-flex>
+                                                  
+                                     
+            
+                                             </v-flex>
+                                            
+              
+              
+                                              <v-btn 
+                                              type = "submit"
+                                              class="mx-0 mt-2 mb-3"  
+                                              large
+                                              dark
+                                              color = "warning nodecor"
+              
+                                            >
+                                          Rate
+                                         </v-btn>
+                                            </v-flex>
+                                          </v-card-text>
+                                          </v-card>
+                                        </v-layout>
+              
+                                          <!--/Rating Modal-->
+              
+              
+                                            
+              
+              
+              
+              
+              
+                                              </v-layout>
+                                          </form>
+                                          
+                                        </v-card-text>
+              
+                                          </v-flex>
+                                          </v-card>
+                                      
+
+
+
+                                 </v-dialog>
+                                 
+                                 </v-flex>
+                                 {%else%}
+                                 {%endif%}
 
                    
-      </v-container>
+                    </v-layout>
+                     <v-flex xs12>
+                            <v-btn  class = "ma-0 nodecor" href = "/user/{{ad.author.id}}" block dark color = "blue">View profile</v-btn>
+                        </v-flex>
+                    </v-card>
+                    
+                    </v-flex>
 
+                    {%endfor%}            
 
-      {%else%}                       
-      <v-container   grid-list-xl  >
-          <v-text text-center class = "display-1">No Ads found</v-text>
-           <v-divider inset></v-divider>                                                     
-     </v-container>
-     {%endif%}
-    
+                  </v-layout>
+                    
+                            
+                    
+                                                                          </v-container> 
+                    
+                          </v-layout>
+                            </v-content>
+
+                    {%else%}                       
+    <v-container   grid-list-xl  >
+        <v-text text-center class = "display-1">No Ads found</v-text>
+         <v-divider inset></v-divider>                                                     
+   </v-container>
+   {%endif%}
+                    <!--/ads-->
+
+      
 
                             
 

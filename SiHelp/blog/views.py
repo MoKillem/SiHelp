@@ -105,10 +105,11 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        user = self.request.user
         if Ad.objects.filter(author=self.request.user).count() >= 3:
             messages.error(self.request, 'You can only post 3 ads at maximum!')
             return redirect('/')
-        if not user.profile.tutor and not user.profile.is_active:
+        if  user.profile.tutor ==  False or user.profile.is_active == False :
             messages.error(self.request, 'You are not an activated tutor')
             return redirect('/')
         if Profile.objects.filter(user=self.request.user).first().is_active == False:
