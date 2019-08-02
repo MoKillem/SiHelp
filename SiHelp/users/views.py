@@ -150,7 +150,7 @@ def profile(request):
                 u_form.save()
                 p_form.save()
                 messages.success(request, f'Your account information is updated')
-                return redirect('user-profile')
+                return redirect('blog-marketplace')
             else:
                 print(u_form.errors)
                 print(p_form.errors)

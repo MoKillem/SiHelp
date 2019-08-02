@@ -11,11 +11,15 @@
 
 {% block content %}
 {% if messages %}
-<card class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</card>
+{% for message in messages %}
+  <div id = "messages1" class="alert {{ message.tags }} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+{% endfor %}
+   
 {% endif %}
 <!-- right bar-->
 <v-navigation-drawer temporary :width = "200" app class = "white  " sticky  v-model = "drawer" >
@@ -199,7 +203,7 @@
                                     <div>Contact : {{ad.author.profile.phone}}</div>
                                     <div>Price   : {{ad.price}}$/hr</div>
                                     <v-flex mr-3>
-                                        {% if user.profile.tutor and user.profile.is_active %}
+                                        {% if not user.profile.tutor and user.profile.is_active %}
 
                                         <v-dialog v-model="dialog" max-width="600px" >
                                           <template v-slot:activator="{ on }">
@@ -318,7 +322,12 @@
 
                               
 
+<script>
 
+
+
+
+</script>
 
 
 

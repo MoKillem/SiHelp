@@ -133,7 +133,7 @@
                                     <div>Contact : {{ad.author.profile.phone}}</div>
                                     <div>Price   : {{ad.price}}$/hr</div>
                                     <v-flex mr-3>
-                                        {% if mockuser.profile.tutor and mockuser.profile.is_active %}
+                                        {% if not mockuser.profile.tutor and mockuser.profile.is_active %}
 
                                         <v-dialog v-model="dialog" max-width="600px" >
                                           <template v-slot:activator="{ on }">

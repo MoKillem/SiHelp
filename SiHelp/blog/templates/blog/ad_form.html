@@ -43,10 +43,19 @@
   <v-divider class = "mx-5 mb-5" ></v-divider>
   <v-flex   mx-5>
       {% for field in form %}
-  
-      <v-flex mt-3  mx-5>
+        <v-flex mt-3  mx-5>
+
+  {% if 'description' == field.name%}
           <v-text-field
-          :counter="20"
+          name="{{ field.name }}"
+          id="id_{{ field.name }}"
+          label = "Tags"
+          large
+         hint = "{{ field.help_text }}"
+                 persistent-hint
+          box></v-text-field>
+  {%else%}
+          <v-text-field
           name="{{ field.name }}"
           id="id_{{ field.name }}"
           label = "{{ field.label }}"
@@ -56,7 +65,9 @@
           box
         ></v-text-field>
         
-      </v-flex>
+      {%endif%}
+    </v-flex>
+
       {% endfor %}
   
       <v-flex  mx-5 mt-4 mb-5 >
