@@ -7,7 +7,6 @@ class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(widget=forms.fields.TextInput(attrs={'placeholder': 'e.g man@gmail.com'}))
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
-    phone = forms.CharField(max_length=30)
     
     def clean_email(self):
         data = self.cleaned_data['email']
@@ -19,7 +18,7 @@ class UserRegisterForm(UserCreationForm):
         return data
     class Meta:
         model = User
-        fields = ['username','email','first_name','last_name','phone','password1','password2']
+        fields = ['username','email','first_name','last_name','password1','password2']
 
 
 
@@ -27,15 +26,15 @@ class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
-    phone = forms.CharField(max_length=30)
     class Meta:
         model = User
-        fields = ['username','email','first_name','last_name','phone']
+        fields = ['username','email','first_name','last_name']
 
 class ProfileUpdateForm(forms.ModelForm):
     tutor = forms.BooleanField(required = False, initial=False)
+    phone = forms.CharField(max_length=30)
     class Meta:
         model = Profile
-        fields = ['tutor','pic']
+        fields = ['tutor','pic','phone']
 
     

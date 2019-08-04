@@ -108,19 +108,19 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         user = self.request.user
         if Ad.objects.filter(author=self.request.user).count() >= 3:
             messages.error(self.request, 'You can only post 3 ads at maximum!')
-            return redirect('/')
+            return redirect('/marketplace')
         if  user.profile.tutor ==  False or user.profile.is_active == False :
             messages.error(self.request, 'You are not an activated tutor')
-            return redirect('/')
+            return redirect('/marketplace')
         if Profile.objects.filter(user=self.request.user).first().is_active == False:
             messages.error(self.request, 'Please activate your account by verifying your email address first')
-            return redirect('/')
+            return redirect('/marketplace')
         return super().form_valid(form)
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ad
-    fields = ['title','subject', 'unit', 'description','price']
+    fields = ['title','subject', 'unit', 'description','price','phone']
     success_url = reverse_lazy('user-profile')
     
     def form_valid(self, form):
@@ -154,18 +154,18 @@ def add_comment_to_post(request, pk):
             rate.ad_id = ad
             rate.user_id = request.user
             rate.save()
-            return redirect('/')
+            return redirect('/marketplace')
         elif form.is_valid() and len(exist) != 0 and request.user.profile.tutor == False:
             rate = exist.first()
             rate.rating = form.cleaned_data['rating']
             rate.save(update_fields=["rating"]) 
-            return redirect('/') #flash some message here
+            return redirect('/marketplace') #flash some message here
         elif request.user.profile.tutor == True:
             messages.error(self.request, 'Tutors are not allowed to rate ads')
-            return redirect('/')
+            return redirect('/marketplace')
     else:
         form = CommentForm()
-    return redirect('/')
+    return redirect('/marketplace')
 
 
 def marketplace(request):

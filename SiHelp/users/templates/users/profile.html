@@ -88,22 +88,8 @@
                                                       {% for field in u_form %}
         
         
-                                                      {% if "phone" == field.name %}
                                                     
-                                                      <v-flex mt-3  mx-5>
-                                                              <v-text-field
-                                                              name="{{ field.name }}"
-                                                              id="id_{{ field.name }}"
-                                                              label = "{{ field.label }}"
-                                                              large
-                                                             hint = "{{ field.help_text }}"
-                                                                     persistent-hint
-                                                              box
-                                                              value = {{user.profile.phone}}
-                                                            ></v-text-field>
-                                                            
-                                                          </v-flex>
-                                                 {%else%}
+                                                      
                                                  <v-flex mt-3  mx-5>
                                                     <v-text-field
                                                     name="{{ field.name }}"
@@ -117,9 +103,20 @@
                                                   ></v-text-field>
                                                   
                                                 </v-flex>
-                                                 {%endif%}
                                                     
                                                   {% endfor %}
+                                                  <v-flex mt-3  mx-5>
+                                                      <v-text-field
+                                                      name="phone"
+                                                      id="id_phone"
+                                                      label = "Contact number"
+                                                      large
+                                                             persistent-hint
+                                                      box
+                                                      value = {{user.profile.phone}}
+                                                    ></v-text-field>
+                                                    
+                                                  </v-flex>
                                                   
                                                   <v-flex mt-3 >
                                                   

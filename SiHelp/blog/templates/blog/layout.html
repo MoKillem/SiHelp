@@ -7,7 +7,7 @@
         {% load static %}    
         <link rel="icon" 
          type="image/png" 
-         href="{% static 'blog/Sihelplogo.png' %}">
+         href="{% static 'blog/innovations.png' %}">
    <title>SiHelp</title>
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -197,7 +197,8 @@
                     <v-icon right >exit_to_app</v-icon>
                     </v-btn>
                     {%if not user.profile.is_active%}
-                    <v-btn color=  "red" class ="nodecor" text><span class = "title bold">Not Activated!</span>
+                    
+                    <v-btn color=  "red" class ="nodecor" href= "/reactivate" text><span class = "title bold">Click to activate! </span>
                       {%else%}
                       {%endif%}
                    

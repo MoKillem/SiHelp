@@ -63,7 +63,18 @@
            
           
           </v-flex>
-       
+          <v-flex mt-3  mx-5>
+              <v-text-field
+              name="phone"
+              id="id_phone"
+              label = "Contact number"
+              large
+                     persistent-hint
+              box
+              value = {{user.profile.phone}}
+            ></v-text-field>
+            
+          </v-flex>
             <v-flex  mx-5 mt-4 mb-3 >
                <v-btn type="submit" block large color = "warning">Submit</v-btn>
             </v-flex>

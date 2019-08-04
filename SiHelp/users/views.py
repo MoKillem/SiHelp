@@ -57,6 +57,35 @@ def change_password(request):
         'form': form
     })
     
+def reactivate(request):
+    
+    user = request.user
+    text_content = 'Account Activation Email'
+    subject = 'Email Activation'
+    template_name = "users/activation.html"
+    from_email = settings.EMAIL_HOST_USER
+    recipients = [user.email]
+    kwargs = {
+            "uidb64": user.pk,
+            "token": default_token_generator.make_token(user)
+            }
+    activation_url = reverse("activate_user_account", kwargs=kwargs)
+
+    activate_url = "{0}://{1}{2}".format(request.scheme, request.get_host(), activation_url)
+
+    context = {
+                'user': user,
+                'activate_url': activate_url
+            }
+    html_content = render_to_string(template_name, context)
+    email = EmailMultiAlternatives(subject, text_content, from_email, recipients)
+    email.attach_alternative(html_content, "text/html")
+    email.send()
+    messages.success(self.request, 'An activation email has been send to your email')
+
+    return redirect('blog-marketplace')
+
+  
 #register view
 def register(request):
     if request.method == 'POST':
