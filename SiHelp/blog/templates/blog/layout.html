@@ -20,9 +20,9 @@
    </head>
 <body >
     
-    <div id="app" >
+    <div id="app">
 
-        <v-app light >
+        <v-app dark   >
         {% block modal %}
         {% endblock %}
 
@@ -32,9 +32,9 @@
 
 
             <!--NavBar-->
-            <v-toolbar dark color = "blue">
+            <v-toolbar dark style = "background-color : rgb(26, 24, 24)">
               {% if       "/marketplace/" == request.path     %}
-                <v-toolbar-side-icon class = "white--text" @click = "drawer = !drawer"></v-toolbar-side-icon>
+                <v-toolbar-side-icon color = "pink" class = "white--text" @click = "drawer = !drawer"></v-toolbar-side-icon>
                 {%else%}
 {%endif%}
                 <v-toolbar-title>
@@ -52,16 +52,17 @@
                                       
                 <v-toolbar-items >
 <!--Register-->
-<v-btn flat text href="/register" class ="nodecor">Register
-  <v-icon right >group_add</v-icon>
+<v-btn flat text href="/register" class ="nodecor " > 
+  <v-icon left style = "color: #E91E63
+  " >group_add</v-icon>Register
 </v-btn>
 
   </v-btn>
                       <!--/Register-->
 
-                    <v-menu offset-y>
+                    <v-menu offset-y >
                         <v-btn class ="pr-5"  flat slot="activator">
-                          <v-icon left>expand_more</v-icon>
+                          <v-icon left style = "color: #E91E63">expand_more</v-icon>
                           
                           <span >Menu</span>
                         </v-btn>
@@ -79,7 +80,7 @@
                     <v-dialog v-model="dialog" max-width="600px" >
                       <template v-slot:activator="{ on }">
                         <v-btn flat class ="nodecor " dark v-on="on">Login
-                        <v-icon right >exit_to_app</v-icon></v-btn>
+                        <v-icon right style = "color: #E91E63" >exit_to_app</v-icon></v-btn>
                       </template>
                   <v-layout column>
                       <v-card >

@@ -22,7 +22,6 @@
    
 {% endif %}
 <!-- right bar-->
-{{user.profile.phone}}
 <v-navigation-drawer temporary :width = "200" app class = "white  " sticky  v-model = "drawer" >
                   <v-layout column justify-space-between>
                   <v-flex ml-1 >
@@ -34,7 +33,7 @@
                     <form type="get" action="." >
                         {% csrf_token %}
 
-                    <v-flex text-center  > 
+                    <v-flex   > 
                      
 
                         <v-btn
@@ -51,7 +50,7 @@
                     <form type="get" action="." >
                         {% csrf_token %}
 
-                    <v-flex text-center> 
+                    <v-flex ml-0 > 
                       
                         <v-btn
                         text
@@ -60,7 +59,7 @@
                         name = "mostaffordable"
                         
                         flat
-                        color="blue lighten--2 accent-4"
+                        color="pink lighten--2 accent-4"
                       >
                         Most Affordable
                     </v-flex>
@@ -68,7 +67,7 @@
                     <form type="get" action="." >
                         {% csrf_token %}
 
-                    <v-flex text-center > 
+                    <v-flex  > 
                         <v-btn
                         text
                         block type = "submit" 
@@ -91,7 +90,7 @@
                         block
                          type="submit"
                         flat
-                        color="blue lighten--2 accent-4"
+                        color="pink lighten--2 accent-4"
                       >
                         Create Ad
                     </v-flex>
@@ -111,7 +110,7 @@
           
                           <v-card
                           class="pa-3"
-                          
+                          light
                           class="rounded-card"
                         >
                         <form type="get" action=".">
@@ -127,11 +126,11 @@
                   placeholder = "Search for subject or unit"
                 ></v-text-field>
           
-                <v-btn class = "blue mt-2" type = "submit"  name = search icon>
+                <v-btn class = "pink  mt-2" type = "submit"  name = search icon>
                   <v-icon color = "white" >search</v-icon>
                 </v-btn>
           
-                <v-btn  type = "submit" name = "refresh" class = "blue mt-2" icon>
+                <v-btn  type = "submit" name = "refresh" class = "pink mt-2" icon>
                   <v-icon color = "white ">refresh</v-icon>
                 </v-btn>
             
@@ -155,9 +154,10 @@
                      
 
                     <v-flex xs10  sm8 md5 mt-3>
-                    <v-card   class=" pb-0 pt-3"
-                                    
-                    class="rounded-card"
+                    <v-card  light
+                    class=" pb-0 pt-3"
+                    outline   
+                    dense
                     >
                     <v-layout column  justify-space-around>
                         <v-flex >
@@ -170,14 +170,16 @@
                             {%endfor%}
                             {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
                             
-                            <span><v-icon color="gray darken-2  " class = "starry">star</v-icon></span>
+                            <span><v-icon color="pink lighten-4
+                              " class = "starry">star</v-icon></span>
                             
                             {%endfor%}
                             
                             {%else%}
                             {%for i in 10|get_range %}
                             
-                            <span><v-icon  color="gray darken-2" class = "starry" >star</v-icon></span>
+                            <span><v-icon  color="pink lighten-4
+                              " class = "starry" >star</v-icon></span>
                             
                             {%endfor%}
                             {%endif%}
@@ -193,7 +195,8 @@
                                   size="130"
                                   color="grey lighten-4"
                                 >
-                                  <img src="{{ ad.author.profile.pic.url }}" alt="avatar">
+                                  <v-img            gradient="to top right, rgba(252,228,236,.33), rgba(248, 187, 208, .33)"
+                                  src="{{ ad.author.profile.pic.url }}" alt="avatar"></v-img>
                                 </v-avatar>
                                 
                             </v-flex>
@@ -292,7 +295,7 @@
                    
                     </v-layout>
                      <v-flex xs12>
-                            <v-btn  class = "ma-0 nodecor" href = "/user/{{ad.author.id}}" block dark color = "blue">View profile</v-btn>
+                            <v-btn  class = "ma-0 nodecor" href = "/user/{{ad.author.id}}" block dark color = "pink">View profile</v-btn>
                         </v-flex>
                     </v-card>
                     
