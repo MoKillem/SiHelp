@@ -117,6 +117,7 @@
 
                       <v-text-field
                       dense
+                      color = "pink"
                       floating
                       class = "mt-3 mx-2"
                       name="search_box"  
@@ -155,7 +156,7 @@
 
                     <v-flex xs10  sm8 md5 mt-3>
                     <v-card  light
-                    class=" pb-0 pt-3"
+                    class="rounded-card pb-0 pt-3"
                     outline   
                     dense
                     >
@@ -195,7 +196,7 @@
                                   size="130"
                                   color="grey lighten-4"
                                 >
-                                  <v-img            gradient="to top right, rgba(252,228,236,.33), rgba(248, 187, 208, .33)"
+                                  <v-img            
                                   src="{{ ad.author.profile.pic.url }}" alt="avatar"></v-img>
                                 </v-avatar>
                                 
@@ -211,7 +212,7 @@
 
                                         <v-dialog v-model="dialog" max-width="600px" >
                                           <template v-slot:activator="{ on }">
-                                    <v-btn dark v-on="on" class = "text-left " block  color = "warning">Rate</v-btn>
+                                    <v-btn dark v-on="on" class = "text-left " block  color = "pink">Rate</v-btn>
                                  </template>
 
                                  <v-layout column>
@@ -256,7 +257,7 @@
                                               class="mx-0 mt-2 mb-3"  
                                               large
                                               dark
-                                              color = "warning nodecor"
+                                              color = "pink"
               
                                             >
                                           Rate
@@ -323,7 +324,31 @@
       
 
                             
-
+                    <v-card height="20" dark mt-5 pt-5>
+                        <v-footer
+                        style = "background-color:  rgb(26, 24, 24)"
+                          absolute
+                          class="font-weight-medium"
+                        >
+                        <v-flex
+                        offset-xs3
+                          xs3
+                        >
+                         2019  — <strong>SiHelp</strong>
+                        </v-flex>
+                        <v-flex >
+                           <v-layout row justify-space-around>
+                            
+                              <a href = "/" class = "nodecor " > <v-icon class="mx-2 socials  " fab dark color="pink"    > fab fa-facebook</v-icon></a></span>
+                              <a href = "/" class = "nodecor " ><v-icon class="mx-2 socials " fab dark color="pink"  >fab fa-twitter</v-icon></a>
+                              <a href = "/" class = "nodecor " >  <v-icon class="mx-2 socials " fab dark color="pink"  >fab fa-google-plus</v-icon></a>
+                              <a href = "/" class = "nodecor " >  <v-icon class="mx-2 socials " fab dark color="pink"  >fab fa-instagram</v-icon></a>
+            </v-layout>
+            
+                        </v-flex>
+                        </v-footer>
+                      </v-card>
+              
                               
 
 <script>

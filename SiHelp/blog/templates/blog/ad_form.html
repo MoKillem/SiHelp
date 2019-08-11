@@ -47,6 +47,7 @@
 
   {% if 'description' == field.name%}
           <v-text-field
+          color = "pink"
           name="{{ field.name }}"
           id="id_{{ field.name }}"
           label = "Tags"
@@ -56,6 +57,7 @@
           box></v-text-field>
   {%else%}
           <v-text-field
+          color = "pink"
           name="{{ field.name }}"
           id="id_{{ field.name }}"
           label = "{{ field.label }}"
@@ -71,7 +73,7 @@
       {% endfor %}
   
       <v-flex  mx-5 mt-4 mb-5 >
-         <v-btn type="submit" block large color = "warning">Create ad</v-btn>
+         <v-btn type="submit" block large color = "pink">Create ad</v-btn>
       </v-flex>
       
   
