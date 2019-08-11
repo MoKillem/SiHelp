@@ -12,7 +12,7 @@
                 <v-layout row wrap justify-space-around>
             <v-flex xs10  sm8 md5 mt-3>
 
-              <v-card   class=" pb-0 pt-3"
+              <v-card  light class=" pb-0 pt-3"
                               
               class="rounded-card"
               >
@@ -25,11 +25,11 @@
 
 
                       {% for n in avg|rounding|get_range %}
-                      <span><v-icon color="amber darken-2"  class = "starry" >star</v-icon></span>
+                      <span><v-icon color="pink darken-1 " class = "starry" >star</v-icon></span>
                       {%endfor%}
                       {%for i in 10|subtract:avg|rounding|get_range %}
                       
-                      <span><v-icon color="gray darken-2  " class = "starry">star</v-icon></span>
+                      <span><v-icon color="pink lighten-4" class = "starry">star</v-icon></span>
                       
                       {%endfor%}
                       
@@ -84,7 +84,7 @@
 
                         
                     <v-flex xs10  sm8 md5 mt-3>
-                    <v-card   class=" pb-0 pt-3"
+                    <v-card  light class=" pb-0 pt-3"
                                     
                     class="rounded-card"
                     >
@@ -95,18 +95,18 @@
                         <v-flex text-center>
                             {% if ad.average_rating %}
                             {% for n in ad.average_rating|rounding|get_range %}
-                            <span><v-icon color="amber darken-2"  class = "starry" >star</v-icon></span>
+                            <span><v-icon color="pink darken-1"  class = "starry" >star</v-icon></span>
                             {%endfor%}
                             {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
                             
-                            <span><v-icon color="gray darken-2  " class = "starry">star</v-icon></span>
+                            <span><v-icon color="pink lighten-4" class = "starry">star</v-icon></span>
                             
                             {%endfor%}
                             
                             {%else%}
                             {%for i in 10|get_range %}
                             
-                            <span><v-icon  color="gray darken-2" class = "starry" >star</v-icon></span>
+                            <span><v-icon  color="pink lighten-4" class = "starry" >star</v-icon></span>
                             
                             {%endfor%}
                             {%endif%}

@@ -81,7 +81,7 @@ def reactivate(request):
     email = EmailMultiAlternatives(subject, text_content, from_email, recipients)
     email.attach_alternative(html_content, "text/html")
     email.send()
-    messages.success(self.request, 'An activation email has been send to your email')
+    messages.success(request, 'An activation email has been send to your email')
 
     return redirect('blog-marketplace')
 

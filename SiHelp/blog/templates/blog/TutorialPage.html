@@ -22,9 +22,9 @@
    
 {% endif %}
 <!-- right bar-->
-<v-navigation-drawer temporary :width = "200" app class = "white  " sticky  v-model = "drawer" >
-                  <v-layout column justify-space-between>
-                  <v-flex ml-1 >
+<v-navigation-drawer temporary :width = "200" app  sticky  v-model = "drawer" >
+                  <v-layout column  justify-space-between>
+                  <v-flex left >
                     <v-card-text  class = " title  .font-weight-thin">
                      <div class = "coloredblue"> View Top Posts</div>
                     </v-card-text>
@@ -33,7 +33,7 @@
                     <form type="get" action="." >
                         {% csrf_token %}
 
-                    <v-flex   > 
+                    <v-flex left  > 
                      
 
                         <v-btn
@@ -42,7 +42,7 @@
                         type = "submit"
                         name = "highestrated"
                         flat
-                        color="blue lighten--2 accent-4"
+                        color="pink lighten--2 accent-4"
                       >
                         Most liked
                     </v-flex>
@@ -50,7 +50,7 @@
                     <form type="get" action="." >
                         {% csrf_token %}
 
-                    <v-flex ml-0 > 
+                    <v-flex left > 
                       
                         <v-btn
                         text
@@ -67,13 +67,13 @@
                     <form type="get" action="." >
                         {% csrf_token %}
 
-                    <v-flex  > 
+                    <v-flex left  > 
                         <v-btn
                         text
                         block type = "submit" 
                         name = controversial
                         flat
-                        color="blue lighten--2 accent-4"
+                        color="pink lighten--2 "
                       >
                        Most Controversial
                     </v-flex>
@@ -84,7 +84,7 @@
                     <form  action="/post/new/">
                         {% csrf_token %}
 
-                    <v-flex text-center> 
+                    <v-flex left> 
                         <v-btn
                         text
                         block
@@ -167,7 +167,7 @@
                         <v-flex text-center>
                             {% if ad.average_rating %}
                             {% for n in ad.average_rating|rounding|get_range %}
-                            <span><v-icon color="amber darken-2"  class = "starry" >star</v-icon></span>
+                            <span><v-icon color="pink darken-2"  class = "starry" >star</v-icon></span>
                             {%endfor%}
                             {%for i in 10|subtract:ad.average_rating|rounding|get_range %}
                             
@@ -212,7 +212,7 @@
 
                                         <v-dialog v-model="dialog" max-width="600px" >
                                           <template v-slot:activator="{ on }">
-                                    <v-btn dark v-on="on" class = "text-left " block  color = "pink">Rate</v-btn>
+                                    <v-btn dark v-on="on" class = "text-left " block  >Rate</v-btn>
                                  </template>
 
                                  <v-layout column>
