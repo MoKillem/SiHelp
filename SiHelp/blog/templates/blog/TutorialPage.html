@@ -44,7 +44,7 @@
                         flat
                         color="pink lighten--2 accent-4"
                       >
-                        Most liked
+                        Most loved
                     </v-flex>
                     </form>
                     <form type="get" action="." >
@@ -224,7 +224,7 @@
                                           <v-flex mx-5>
               
                                           <v-card-text>
-                                              <form class = " mt-3 navbar-form navbar-right" enctype="multipart/form-data"  method = "POST" action = "post/{{ad.id}}/rate/">
+                                              <form class = " mt-3 navbar-form navbar-right" enctype="multipart/form-data"  method = "POST" action = "/post/{{ad.id}}/rate/">
                                                   {% csrf_token %}
                                                   
                                                   <v-layout column>
@@ -236,7 +236,6 @@
                                                       type="number" 
                                                       name="rating" 
                                                       id="id_rating"
-                                                      :counter="20"
                                                      large
                                                      hint = "{{ field.help_text }}"
                                                              persistent-hint
