@@ -38,7 +38,7 @@
   
       <v-layout      column>
           <v-card-text class = "text-xs-center mb-1 mt-4 font-weight-light display-1">
-    Please Fill in all required fields 
+    Continue filling out the Form.
     <div class ="caption">2/2</div>     
 
   </v-card-text>
@@ -55,10 +55,10 @@
           </v-flex>
           
           <v-flex  mt-3 mx-5>
-          
-          <div class="custom-file">
-              <label class="custom-file-label" for="customFileLang">Upload Profile Picture</label>
-              <input type="file" class="custom-file-input" id="customFileLang" name = "pic" accept ="image/*">
+
+          <div class="custom-file" >
+              <label class="custom-file-label" for="customFileLang" id = "responsed" >Upload Profile Picture</label>
+              <input type="file" class="custom-file-input" id="customFileLang" name = "pic" accept ="image/*" onchange="myfunction()">
             </div>
            
           
@@ -87,6 +87,8 @@
     </form>
     </v-layout>
     </v-container>
+
+    
 {% endblock %}
 
 

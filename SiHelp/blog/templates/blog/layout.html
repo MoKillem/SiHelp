@@ -2,7 +2,6 @@
 
 <html>
     <head>
-     <div id="loadOverlay" style="background-color:#333; position:absolute; top:0px; left:0px; width:100%; height:100%; z-index:2000;"></div>
 
         {% load static %}    
         <link rel="stylesheet" href="{% static 'blog/Entry.css' %}">
@@ -20,7 +19,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
    </head>
-<body >
+<body  >
     
     <div id="app">
 
@@ -143,7 +142,8 @@
                            </v-btn>
 
                               </v-flex>
-
+<v-flex text-center>    <a class = "text-white font-italic" href = "/password-reset" >Forgot my password!</a>
+</v-flex>
                             
                             </v-card-text>
                             </v-card>
@@ -220,7 +220,16 @@
              </v-toolbar>
 
         <!--/NavBar-->
+        <div id = "screen">
+                {% load static %}
 
+                <v-parallax src="{% static 'blog/success.png' %}" height="600">
+              <v-card-title class = "display-1 text-white">Mobile view will be available shortly. </v-card-title>
+              <v-card-title class = "display-1 text-white">Sorry for the inconvenience.</v-card-title>
+
+           </v-parallax>
+        </div>
+              <div id = "appcontent">
         <v-content>
         <!--Content-->
                 {% block content %}
@@ -250,7 +259,7 @@
         {% endblock %}
         <!--/Content-->
         </v-content>
-        
+      </div>
         
       
 
@@ -288,6 +297,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
   </script>
 
+<script>
+   function myfunction(){
 
+    console.log(this);
+    var fullPath = document.getElementById('customFileLang').value;
+
+
+     if (fullPath) {
+    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+    var filename = fullPath.substring(startIndex);
+    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+        filename = filename.substring(1);
+    }
+    document.getElementById("responsed").innerHTML = filename.charAt(0).toUpperCase() + filename.slice(1) ;
+    document.getElementById("responsed").style.backgroundColor = "#0FEC8A";
+    document.getElementById("responsed").style.color = "black";
+
+    
+
+}
+   }
+
+    </script>
   </body>
 </html>

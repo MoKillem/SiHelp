@@ -129,7 +129,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = "blog-marketplace"
 LOGIN_URL = "loginAcc"
 LOGOUT_REDIRECT_URL = "blog-marketplace"
-
+PASSWORD_RESET_REDIRECT_URL = "blog-marketplace"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

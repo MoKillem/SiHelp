@@ -101,7 +101,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     model = Ad
     fields = ['title','subject', 'unit', 'description','price']
-    success_url = '/'
+    success_url = '/marketplace'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
