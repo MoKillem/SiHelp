@@ -131,8 +131,11 @@ LOGIN_URL = "loginAcc"
 LOGOUT_REDIRECT_URL = "blog-marketplace"
 PASSWORD_RESET_REDIRECT_URL = "blog-marketplace"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+
+
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'help@sihelp.com.au'
+EMAIL_HOST_PASSWORD = 'Mokillem123*'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'bbmsjyl@gmail.com'
-EMAIL_HOST_PASSWORD = 'rwtwwtvljlcgyykz'
+EMAIL_USE_SSL = False

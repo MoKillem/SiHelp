@@ -21,16 +21,6 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
 
-def add_message(success_message=None):
-    def decorator(func):
-        def inner(request, *args, **kwargs):
-            resp = func(request, *args, **kwargs)
-            if isinstance(resp, HttpRedirectResponse):
-                messages.success(request, message)
-            return resp
-        return wraps(func)(inner)
-    return decorator
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

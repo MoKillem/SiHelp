@@ -33,6 +33,7 @@
 
 
             <!--NavBar-->
+            <div id = "nav">
             <v-toolbar dark style = "background-color : rgb(26, 24, 24)">
               {% if       "/marketplace/" == request.path     %}
                 <v-toolbar-side-icon color = "pink" class = "white--text" @click = "drawer = !drawer"></v-toolbar-side-icon>
@@ -218,7 +219,7 @@
 
 
              </v-toolbar>
-
+            </div>
         <!--/NavBar-->
         <div id = "screen">
                 {% load static %}
